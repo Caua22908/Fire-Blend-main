@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fire Blend - Estilo Global Sem Limites</title>
+    <link rel="shortcut icon" href="assest/img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="#"><span class="logo-accent">Fire </span>Blend</a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html" data-lang="home" class="active">Início</a></li>
+
+                    <li><a href="coleções.html"  data-lang="collections">Coleções</a></li>
+                    <li><a href="carrinho.html" data-lang="cart" >Carrinho</a></li>
+                    <li><a href="contato.html" data-lang="contact">Contato</a></li>
+                    <li class="language-switch">
+                      <button id="pt-BR" class="active">PT-BR</button>
+                      <button id="en-US" >EN-US</button>
+                    </li>
+                  
+                </ul>
+            </nav>
+            <div class="search-container">
+    <input 
+      type="text" 
+      placeholder="Buscar roupas, estilos..." 
+      class="search-input" 
+      id="searchInput" 
+      autocomplete="off"
+    />
+    <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#ff7f00" stroke-width="2" width="24" height="24" >
+  <circle cx="11" cy="11" r="7" />
+  <line x1="16.65" y1="16.65" x2="21" y2="21" />
+</svg>
+
+    <div class="suggestions" id="suggestionsBox"></div>
+  </div>
+    
+
+    </header>
+
+    <script>
+    const roupas = [
+      "Moletom Denim Tears The Cotton Wreath",
+      "Louis Vuitton LV Skate Sneaker Beige White",
+      "Camiseta Louis Vuitton Ready to Wear",
+      "Camiseta Louis Vuitton Ready to Wear",
+      "Gorro Louis Vuitton Gray",
+      "Jaqueta Louis Vuitton Monogram Flower",
+      "Jaqueta Louis Vuitton Bomber Embroidered",
+      "Bermuda Louis Vuitton Jeans Denim",
+      "Cinto Louis Vuitton Monogram Preto",
+      "Jaqueta Louis Vuitton Aviator Monogram",
+      "Bermuda Jeans Louis Vuitton Carpenter",
+      "Camiseta Louis Vuitton Jeans By Tyler",
+      "Colete Jeans",
+      "Mochila Louis Vuitton Christopher x Supreme",
+      "Camisa Polo"
+    ];
+
+    const input = document.getElementById('searchInput');
+    const suggestionsBox = document.getElementById('suggestionsBox');
+
+    function filterSuggestions(value) {
+      if (!value) {
+        suggestionsBox.classList.remove('active');
+        suggestionsBox.innerHTML = '';
+        return;
+      }
+      const filtered = roupas.filter(item =>
+        item.toLowerCase().includes(value.toLowerCase())
+      );
+      if (filtered.length === 0) {
+        suggestionsBox.classList.remove('active');
+        suggestionsBox.innerHTML = '';
+        return;
+      }
+      suggestionsBox.innerHTML = filtered.map(item => `<div class="suggestion-item">${item}</div>`).join('');
+      suggestionsBox.classList.add('active');
+    }
+
+    input.addEventListener('input', () => {
+      filterSuggestions(input.value);
+    });
+
+    suggestionsBox.addEventListener('click', (e) => {
+      if (e.target.classList.contains('suggestion-item')) {
+        input.value = e.target.textContent;
+        suggestionsBox.classList.remove('active');
+      }
+    });
+
+    // Fecha sugestões ao clicar fora
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.search-container')) {
+        suggestionsBox.classList.remove('active');
+      }
+    });
+  </script>
+    
+
+
+    <section class="hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <h1 data-lang="heroTitle">Defina Seu Estilo. Redefina a Moda.</h1>
+                <p data-lang="heroSubtitle">Descubra uma curadoria exclusiva de peças internacionais, onde o design encontra a inovação.</p>
+                <a href="#" class="btn primary" data-lang="exploreBtn">Explorar Agora</a>
+            </div>
+            <div class="hero-image">
+                <img src="assest/img/Gemini_Generated_Image_x4wkoox4wkoox4wk.png" alt="Modelo de moda com roupas de design inovador">
+            </div>
+        </div>
+    </section>
+    <script>
+  function criarBolinha() {
+    const bolinha = document.createElement('div');
+    bolinha.classList.add('bolinha');
+
+    // Define tamanho aleatório
+    const tamanho = Math.random() * 20 + 5; // entre 5px e 25px
+    bolinha.style.width = tamanho + 'px';
+    bolinha.style.height = tamanho + 'px';
+
+    // Posição horizontal aleatória
+    bolinha.style.left = Math.random() * window.innerWidth + 'px';
+
+    // Duração da animação aleatória
+    const duracao = Math.random() * 3 + 2; // entre 2s e 5s
+    bolinha.style.animationDuration = duracao + 's';
+
+    document.body.appendChild(bolinha);
+
+    // Remove do DOM após a animação
+    setTimeout(() => {
+      bolinha.remove();
+    }, duracao * 1000);
+  }
+
+  // Criar bolinhas continuamente a cada 100ms
+  setInterval(criarBolinha, 100);
+</script>
+
+    <section class="featured-products">
+        <div class="container">
+            <h2 data-lang="featuredTitle">Destaques da Temporada</h2>
+            <p data-lang="featuredSubtitle">Cortes ousados, texturas inovadoras e cores que marcam.</p>
+            <div class="product-grid">
+                <div class="product-item">
+                    <img src="assest/img/moletom.webp" alt="Moletom">
+                    <h3><span data-lang="MoletomTitle">Moletom Denim Tears</span></h3>
+                    <p data-lang="MoletomDesc">Toque de audácia para seu dia a dia.</p>
+                    <span class="price">R$ 899,00</span>
+                    <a href="#" class="btn secondary" data-lang="viewDetails">Ver Detalhes</a>
+                </div>
+                <div class="product-item">
+                    <img src="assest/img/Camiseta.jpeg" alt="Camiseta com design moderno">
+                    <h3><span data-lang="CamisetaTitle">Camiseta Amiri Bar</span></h3>
+                    <p data-lang="pantsDesc">Conforto e forma em perfeita harmonia.</p>
+                    <span class="price">R$ 549,00</span>
+                    <a href="#" class="btn secondary" data-lang="viewDetails">Ver Detalhes</a>
+                </div>
+                <div class="product-item">
+                    <img src="assest/img/jaqueta.jpeg" alt="Jaqueta Branca de grife">
+                    <h3><span data-lang="JaquetaTitle">Jaqueta Palace Palamat</span></h3>
+                    <p data-lang="jacketDesc">Versatilidade e elegância para qualquer ocasião.</p>
+                    <span class="price">R$ 799,00</span>
+                    <a href="#" class="btn secondary" data-lang="viewDetails">Ver Detalhes</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-banner">
+        <div class="container">
+            <h2 data-lang="ctaBannerTitle">Experiência Única de Compras</h2>
+            <p data-lang="ctaBannerSubtitle">Peças selecionadas a dedo para um guarda-roupa que inspira.</p>
+            <a href="coleções.html" class="btn primary" data-lang="shopCollections">Comprar Coleções</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Fire Blend Moda. Todos os direitos reservados.</p>
+            <div class="social-media">
+                <a href="#">Facebook</a>
+                <a href="#">Instagram</a>
+                <a href="#">Pinterest</a>
+            </div>
+        </div>
+    </footer>
+
+<script src="script.js"></script>
+    
+
+</body>
+</html>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fire Blend - Contato</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="shortcut icon" href="assest/img/favicon.ico" type="image/x-icon">
+    
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div class="logo">
+          <a href="index.html"><span class="logo-accent">Fire </span>Blend</a>
+        </div>
+        <nav>
+          <ul>
+            <li><a href="index.html" data-lang="home">Início</a></li>
+            <li>
+              <a href="coleções.html" data-lang="collections">Coleções</a>
+            </li>
+            <li><a href="carrinho.html" data-lang="Carrinho">Carrinho</a></li>
+            <li>
+              <a href="contato.html" data-lang="contact" class="active"
+                >Contato</a
+              >
+            </li>
+            <li class="language-switch">
+              <button id="pt-BR" class="active">PT-BR</button>
+              <button id="en-US">EN-US</button>
+            </li>
+          </ul>
+        </nav>
+
+<div class="search-container">
+    <input 
+      type="text" 
+      placeholder="Buscar roupas, estilos..." 
+      class="search-input" 
+      id="searchInput" 
+      autocomplete="off"
+    />
+    <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#ff7f00" stroke-width="2" width="24" height="24" >
+  <circle cx="11" cy="11" r="7" />
+  <line x1="16.65" y1="16.65" x2="21" y2="21" />
+</svg>
+
+    <div class="suggestions" id="suggestionsBox"></div>
+  </div>
+
+
+      </div>
+    </header>
+
+    <script>
+    const roupas = [
+      "Moletom Denim Tears The Cotton Wreath",
+      "Louis Vuitton LV Skate Sneaker Beige White",
+      "Camiseta Louis Vuitton Ready to Wear",
+      "Camiseta Louis Vuitton Ready to Wear",
+      "Gorro Louis Vuitton Gray",
+      "Jaqueta Louis Vuitton Monogram Flower",
+      "Jaqueta Louis Vuitton Bomber Embroidered",
+      "Bermuda Louis Vuitton Jeans Denim",
+      "Cinto Louis Vuitton Monogram Preto",
+      "Jaqueta Louis Vuitton Aviator Monogram",
+      "Bermuda Jeans Louis Vuitton Carpenter",
+      "Camiseta Louis Vuitton Jeans By Tyler",
+      "Colete Jeans",
+      "Mochila Louis Vuitton Christopher x Supreme",
+      "Camisa Polo"
+    ];
+
+    const input = document.getElementById('searchInput');
+    const suggestionsBox = document.getElementById('suggestionsBox');
+
+    function filterSuggestions(value) {
+      if (!value) {
+        suggestionsBox.classList.remove('active');
+        suggestionsBox.innerHTML = '';
+        return;
+      }
+      const filtered = roupas.filter(item =>
+        item.toLowerCase().includes(value.toLowerCase())
+      );
+      if (filtered.length === 0) {
+        suggestionsBox.classList.remove('active');
+        suggestionsBox.innerHTML = '';
+        return;
+      }
+      suggestionsBox.innerHTML = filtered.map(item => `<div class="suggestion-item">${item}</div>`).join('');
+      suggestionsBox.classList.add('active');
+    }
+
+    input.addEventListener('input', () => {
+      filterSuggestions(input.value);
+    });
+
+    suggestionsBox.addEventListener('click', (e) => {
+      if (e.target.classList.contains('suggestion-item')) {
+        input.value = e.target.textContent;
+        suggestionsBox.classList.remove('active');
+      }
+    });
+
+    // Fecha sugestões ao clicar fora
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.search-container')) {
+        suggestionsBox.classList.remove('active');
+      }
+    });
+  </script>
+
+
+    <section class="hero-section small-hero">
+      <div class="container">
+        <div class="hero-content">
+          <h1 data-lang="contactTitle">Fale Conosco</h1>
+          <p data-lang="contactSubtitle">
+           
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <script>
+  function criarBolinha() {
+    const bolinha = document.createElement('div');
+    bolinha.classList.add('bolinha');
+
+    // Define tamanho aleatório
+    const tamanho = Math.random() * 25 + 5; // entre 5px e 25px
+    bolinha.style.width = tamanho +  'px';
+    bolinha.style.height = tamanho + 'px';
+
+    // Posição horizontal aleatória
+    bolinha.style.left = Math.random() * (2000 - tamanho) + 'px';
+    bolinha.style.top = Math.random() * (475 - tamanho) + 'px';
+    
+
+   
+
+    // Duração da animação aleatória
+    const duracao = Math.random() * 3 + 2; // entre 2s e 5s
+    bolinha.style.animationDuration = duracao + 's';
+
+    document.body.appendChild(bolinha);
+
+    // Remove do DOM após a animação
+    setTimeout(() => {
+      bolinha.remove();
+    }, duracao * 1000);
+  }
+
+  // Criar bolinhas continuamente a cada 100ms
+  setInterval(criarBolinha, 100);
+</script>
+
+    <section class="contact-section">
+      <div class="container">
+        <div class="contact-info">
+          <h2 data-lang="contactInfoTitle">Informações de Contato</h2>
+          <p>
+            <strong data-lang="emailLabel">Email:</strong>
+            <a href="mailto:contato@fireblend.com"
+              >contatofireblend@gmail.com</a
+            >
+          </p>
+          <p>
+            <strong data-lang="phoneLabel">Telefone:</strong>
+            <a href="tel:+5561994208406">+55 (61) 99420-8406</a>
+          </p>
+          <p>
+            <strong data-lang="addressLabel">Endereço:</strong> FACULDADECCI
+          </p>
+          <div class="social-media-contact">
+            <h3 data-lang="socialMediaConnect">Conecte-se:</h3>
+            <a href="#">Facebook</a>
+            <a href="#">Instagram</a>
+            <a href="#">Pinterest</a>
+          </div>
+        </div>
+        <div class="contact-form">
+          <h2 data-lang="contactFormTitle">Envie uma Mensagem</h2>
+          <form action="#" method="POST">
+            <div class="form-group">
+              <label for="name" data-lang="formName">Nome Completo</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                required
+                placeholder="Seu nome"
+              />
+            </div>
+            <div class="form-group">
+              <label for="email" data-lang="formEmail">Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                placeholder="seu.email@exemplo.com"
+              />
+            </div>
+            <div class="form-group">
+              <label for="subject" data-lang="formSubject">Assunto</label>
+              <input
+                type="text"
+                id="subject"
+                name="subject"
+                required
+                placeholder="Assunto da mensagem"
+              />
+            </div>
+            <div class="form-group">
+              <label for="message" data-lang="formMessage">Mensagem</label>
+              <textarea
+                id="message"
+                name="message"
+                rows="6"
+                required
+                placeholder="Sua mensagem..."
+              ></textarea>
+            </div>
+            <button type="submit" class="btn primary" data-lang="formSubmit">
+              Enviar Mensagem
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-banner">
+      <div class="container">
+        <h2 data-lang="ctaContactTitle">Sua Voz é Importante</h2>
+        <p data-lang="ctaContactSubtitle">
+          Estamos sempre prontos para ouvir você.
+        </p>
+        <a href="index.html" class="btn primary" data-lang="backToHome"
+          >Voltar ao Início</a
+        >
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2025 Fire Blend Moda. Todos os direitos reservados.</p>
+        <div class="social-media">
+          <a href="#">Facebook</a>
+          <a href="#">Instagram</a>
+          <a href="#">Pinterest</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

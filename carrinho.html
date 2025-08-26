@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fire Blend - Carrinho</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="assest/img/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html"><span class="logo-accent">Fire </span>Blend</a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html" data-lang="home">Início</a></li>
+                    <li><a href="coleções.html" data-lang="collections">Coleções</a></li>
+                    <li><a href="carrinho.html" data-lang="Carrinho" class="active">Carrinho</a></li>
+                    <li><a href="contato.html" data-lang="contact">Contato</a></li>
+                    <li class="language-switch">
+                        <button id="pt-BR" class="active">PT-BR</button>
+                        <button id="en-US">EN-US</button>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="search-container">
+    <input 
+      type="text" 
+      placeholder="Buscar roupas, estilos..." 
+      class="search-input" 
+      id="searchInput" 
+      autocomplete="off"
+    />
+    <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#ff7f00" stroke-width="2" width="24" height="24" >
+  <circle cx="11" cy="11" r="7" />
+  <line x1="16.65" y1="16.65" x2="21" y2="21" />
+</svg>
+
+    <div class="suggestions" id="suggestionsBox"></div>
+  </div>
+
+    </header>
+
+    <script>
+    const roupas = [
+      "Moletom Denim Tears The Cotton Wreath",
+      "Louis Vuitton LV Skate Sneaker Beige White",
+      "Camiseta Louis Vuitton Ready to Wear",
+      "Camiseta Louis Vuitton Ready to Wear",
+      "Gorro Louis Vuitton Gray",
+      "Jaqueta Louis Vuitton Monogram Flower",
+      "Jaqueta Louis Vuitton Bomber Embroidered",
+      "Bermuda Louis Vuitton Jeans Denim",
+      "Cinto Louis Vuitton Monogram Preto",
+      "Jaqueta Louis Vuitton Aviator Monogram",
+      "Bermuda Jeans Louis Vuitton Carpenter",
+      "Camiseta Louis Vuitton Jeans By Tyler",
+      "Colete Jeans",
+      "Mochila Louis Vuitton Christopher x Supreme",
+      "Camisa Polo"
+    ];
+
+    const input = document.getElementById('searchInput');
+    const suggestionsBox = document.getElementById('suggestionsBox');
+
+    function filterSuggestions(value) {
+      if (!value) {
+        suggestionsBox.classList.remove('active');
+        suggestionsBox.innerHTML = '';
+        return;
+      }
+      const filtered = roupas.filter(item =>
+        item.toLowerCase().includes(value.toLowerCase())
+      );
+      if (filtered.length === 0) {
+        suggestionsBox.classList.remove('active');
+        suggestionsBox.innerHTML = '';
+        return;
+      }
+      suggestionsBox.innerHTML = filtered.map(item => `<div class="suggestion-item">${item}</div>`).join('');
+      suggestionsBox.classList.add('active');
+    }
+
+    input.addEventListener('input', () => {
+      filterSuggestions(input.value);
+    });
+
+    suggestionsBox.addEventListener('click', (e) => {
+      if (e.target.classList.contains('suggestion-item')) {
+        input.value = e.target.textContent;
+        suggestionsBox.classList.remove('active');
+      }
+    });
+
+    // Fecha sugestões ao clicar fora
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.search-container')) {
+        suggestionsBox.classList.remove('active');
+      }
+    });
+  </script>
+
+    <section class="hero-section small-hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 data-lang="cartTitle">Seu Carrinho de Compras</h1>
+                <p data-lang="cartSubtitle">Revise seus itens e finalize sua compra.</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+  function criarBolinha() {
+    const bolinha = document.createElement('div');
+    bolinha.classList.add('bolinha');
+
+    // Define tamanho aleatório
+    const tamanho = Math.random() * 25 + 5; // entre 5px e 25px
+    bolinha.style.width = tamanho +  'px';
+    bolinha.style.height = tamanho + 'px';
+
+    // Posição horizontal aleatória
+    bolinha.style.left = Math.random() * (2000 - tamanho) + 'px';
+    bolinha.style.top = Math.random() * (475 - tamanho) + 'px';
+    
+
+   
+
+    // Duração da animação aleatória
+    const duracao = Math.random() * 3 + 2; // entre 2s e 5s
+    bolinha.style.animationDuration = duracao + 's';
+
+    document.body.appendChild(bolinha);
+
+    // Remove do DOM após a animação
+    setTimeout(() => {
+      bolinha.remove();
+    }, duracao * 1000);
+  }
+
+  // Criar bolinhas continuamente a cada 100ms
+  setInterval(criarBolinha, 100);
+</script>
+
+    <section class="cart-section">
+        <div class="container">
+            <div class="cart-items">
+                <div class="cart-item">
+                    <img src="./img/moletom.webp" alt="Moletom Denim Tears">
+                    <div class="item-details">
+                        <h3 data-lang="cartItem1Title">Moletom Denim Tears</h3>
+                        <p data-lang="cartItem1Price">Preço: R$ 899,00</p>
+                        <div class="quantity-control">
+                            <label for="qty-1" data-lang="quantityLabel">Quantidade:</label>
+                            <input type="number" id="qty-1" value="1" min="1">
+                        </div>
+                        <button class="remove-item" data-lang="removeItem">Remover</button>
+                    </div>
+                </div>
+                <div class="cart-item">
+                    <img src="./img/Camiseta.jpeg" alt="Camiseta Amiri Bar">
+                    <div class="item-details">
+                        <h3 data-lang="cartItem2Title">Camiseta Amiri Bar</h3>
+                        <p data-lang="cartItem2Price">Preço: R$ 549,00</p>
+                        <div class="quantity-control">
+                            <label for="qty-2" data-lang="quantityLabel">Quantidade:</label>
+                            <input type="number" id="qty-2" value="1" min="1">
+                        </div>
+                        <button class="remove-item" data-lang="removeItem">Remover</button>
+                    </div>
+                </div>
+                </div>
+
+            <div class="cart-summary">
+                <h2 data-lang="cartSummaryTitle">Resumo do Pedido</h2>
+                <div class="summary-line">
+                    <span data-lang="subtotal">Subtotal:</span>
+                    <span class="summary-value">R$ 1448,00</span>
+                </div>
+                <div class="summary-line">
+                    <span data-lang="shipping">Frete:</span>
+                    <span class="summary-value" data-lang="shippingCost">A calcular</span>
+                </div>
+                <div class="summary-line total">
+                    <span data-lang="total">Total:</span>
+                    <span class="summary-value">R$ 1448,00</span>
+                </div>
+                <button class="btn primary full-width" data-lang="checkoutBtn">Finalizar Compra</button>
+                <a href="index.html" class="btn secondary full-width" data-lang="continueShopping">Continuar Comprando</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-banner">
+        <div class="container">
+            <h2 data-lang="ctaCartTitle">Sua Moda, Seu Estilo</h2>
+            <p data-lang="ctaCartSubtitle">Aproveite as últimas tendências com a Fire Blend.</p>
+            <a href="collections.html" class="btn primary" data-lang="exploreCollections">Explorar Coleções</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Fire Blend Moda. Todos os direitos reservados.</p>
+            <div class="social-media">
+                <a href="#">Facebook</a>
+                <a href="#">Instagram</a>
+                <a href="#">Pinterest</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

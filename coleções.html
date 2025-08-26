@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fire Blend - Coleções</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="assest/img/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html"><span class="logo-accent">Fire </span>Blend</a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html" data-lang="home">Início</a></li>
+                    <li><a href="coleções.html" data-lang="collections" class="active">Coleções</a></li>
+                    <li><a href="carrinho.html" data-lang="Carrinho">Carrinho</a></li>
+                    <li><a href="contato.html" data-lang="contact">Contato</a></li>
+                    <li class="language-switch">
+                        <button id="pt-BR" class="active">PT-BR</button>
+                        <button id="en-US">EN-US</button>
+                    </li>
+                    
+                </ul>
+            </nav>
+
+            <div class="search-container">
+    <input 
+      type="text" 
+      placeholder="Buscar roupas, estilos..." 
+      class="search-input" 
+      id="searchInput" 
+      autocomplete="off"
+    />
+    <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#ff7f00" stroke-width="2" width="24" height="24" >
+  <circle cx="11" cy="11" r="7" />
+  <line x1="16.65" y1="16.65" x2="21" y2="21" />
+</svg>
+
+    <div class="suggestions" id="suggestionsBox"></div>
+  </div>
+
+        </div>
+    </header>
+
+    <script>
+    const roupas = [
+      "Moletom Denim Tears The Cotton Wreath",
+      "Louis Vuitton LV Skate Sneaker Beige White",
+      "Camiseta Louis Vuitton Ready to Wear",
+      "Camiseta Louis Vuitton Ready to Wear",
+      "Gorro Louis Vuitton Gray",
+      "Jaqueta Louis Vuitton Monogram Flower",
+      "Jaqueta Louis Vuitton Bomber Embroidered",
+      "Bermuda Louis Vuitton Jeans Denim",
+      "Cinto Louis Vuitton Monogram Preto",
+      "Jaqueta Louis Vuitton Aviator Monogram",
+      "Bermuda Jeans Louis Vuitton Carpenter",
+      "Camiseta Louis Vuitton Jeans By Tyler",
+      "Colete Jeans",
+      "Mochila Louis Vuitton Christopher x Supreme",
+      "Camisa Polo"
+    ];
+
+    const input = document.getElementById('searchInput');
+    const suggestionsBox = document.getElementById('suggestionsBox');
+
+    function filterSuggestions(value) {
+      if (!value) {
+        suggestionsBox.classList.remove('active');
+        suggestionsBox.innerHTML = '';
+        return;
+      }
+      const filtered = roupas.filter(item =>
+        item.toLowerCase().includes(value.toLowerCase())
+      );
+      if (filtered.length === 0) {
+        suggestionsBox.classList.remove('active');
+        suggestionsBox.innerHTML = '';
+        return;
+      }
+      suggestionsBox.innerHTML = filtered.map(item => `<div class="suggestion-item">${item}</div>`).join('');
+      suggestionsBox.classList.add('active');
+    }
+
+    input.addEventListener('input', () => {
+      filterSuggestions(input.value);
+    });
+
+    suggestionsBox.addEventListener('click', (e) => {
+      if (e.target.classList.contains('suggestion-item')) {
+        input.value = e.target.textContent;
+        suggestionsBox.classList.remove('active');
+      }
+    });
+
+    // Fecha sugestões ao clicar fora
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.search-container')) {
+        suggestionsBox.classList.remove('active');
+      }
+    });
+  </script>
+    
+    <section class="hero-section small-hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 data-lang="collectionsTitle">Nossas Coleções Exclusivas</h1>
+                <p data-lang="collectionsSubtitle">Descubra as marcas e estilos que definem a Fire Blend.</p>
+            </div>
+            <nav>
+        
+    </section>
+    <script>
+  function criarBolinha() {
+    const bolinha = document.createElement('div');
+    bolinha.classList.add('bolinha');
+
+    // Define tamanho aleatório
+    const tamanho = Math.random() * 25 + 5; // entre 5px e 25px
+    bolinha.style.width = tamanho +  'px';
+    bolinha.style.height = tamanho + 'px';
+
+    // Posição horizontal aleatória
+    bolinha.style.left = Math.random() * (2000 - tamanho) + 'px';
+    bolinha.style.top = Math.random() * (475 - tamanho) + 'px';
+    
+
+   
+
+    // Duração da animação aleatória
+    const duracao = Math.random() * 3 + 2; // entre 2s e 5s
+    bolinha.style.animationDuration = duracao + 's';
+
+    document.body.appendChild(bolinha);
+
+    // Remove do DOM após a animação
+    setTimeout(() => {
+      bolinha.remove();
+    }, duracao * 1000);
+  }
+
+  // Criar bolinhas continuamente a cada 100ms
+  setInterval(criarBolinha, 100);
+</script>
+    
+
+    <section class="collections-grid featured-products">
+        <div class="container"><script src="script.js"></script>
+            <div class="collection-item">
+                <img src="assest/img/louis-vuitton-fall-2023-banner.jpg" alt="Coleção Urbana">
+                <h3 data-lang="collectionUrbanaTitle"><span>Coleção Louis Vuitton</span></h3>
+                <p data-lang="collectionUrbanaDesc">Peças modernas e funcionais para a vida na cidade.</p>
+                <a href="coleçãolouizvuitton.html" class="btn secondary" data-lang="viewCollection">Ver Coleção</a>
+
+                
+            </div>
+
+            <div class="collection-item">
+                <img src="assest/img/1-12-23_LNY_Banner-3.webp" alt="Coleção Amiri">
+                <h3 data-lang="collectionAmiriTitle"><span>Coleção Amiri</span></h3>
+                <p data-lang="collectionAmiriDesc">Luxo moderno, estilo rock e streetwear, alta qualidade e design ousado.</p>
+                <a href="coleçãoamiri.html" class="btn secondary" data-lang="viewCollection">Ver Coleção</a>
+            </div>
+            <div class="collection-item">
+                <img src="assest/img/banner_logos_walls_palace__Copia.webp" alt="Coleção palace">
+                <h3 data-lang="collectionPalaceTitle"><span>Coleção Palace</span></h3>
+                <p data-lang="collectionPalaceDesc">Estampas vibrantes e designs que se destacam na multidão.</p>
+                <a href="#" class="btn secondary" data-lang="viewCollection">Ver Coleção</a>
+            </div>
+            <div class="collection-item">
+                <img src="assest/img/1863834-nike-incbanner.webp" alt="Coleção Nike">
+                <h3 data-lang="collectionNikeTitle"><span>Coleção Nike</span></h3>
+                <p data-lang="collectionNikeDesc">Conforto e estilo inspirados nas ruas globais.</p>
+                <a href="#" class="btn secondary" data-lang="viewCollection">Ver Coleção</a>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="cta-banner">
+        <div class="container"><script src="script.js"></script>
+            <h2 data-lang="ctaCollectionsTitle">Encontre o Seu Próximo Favorito</h2>
+            <p data-lang="ctaCollectionsSubtitle">Cada peça, uma declaração de estilo.</p>
+            <a href="index.html#featured-products" class="btn primary" data-lang="viewAllProducts">Ver Todos os Produtos</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Fire Blend Moda. Todos os direitos reservados.</p>
+            <div class="social-media">
+                <a href="#">Facebook</a>
+                <a href="#">Instagram</a>
+                <a href="#">Pinterest</a>
+            </div>
+        </div>
+
+        <script src="script.js"></script>
+
+
+
+</body>
+</html>
