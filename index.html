@@ -126,12 +126,13 @@
     bolinha.classList.add('bolinha');
 
     // Define tamanho aleatório
-    const tamanho = Math.random() * 20 + 5; // entre 5px e 25px
+    const tamanho = Math.random() * 20 + 15; // entre 5px e 25px
     bolinha.style.width = tamanho + 'px';
     bolinha.style.height = tamanho + 'px';
 
     // Posição horizontal aleatória
     bolinha.style.left = Math.random() * window.innerWidth + 'px';
+   bolinha.style.top = Math.random() * (1100) + 'px';
 
     // Duração da animação aleatória
     const duracao = Math.random() * 3 + 2; // entre 2s e 5s
