@@ -18,6 +18,9 @@
                     <li><a href="index.html" data-lang="home">Início</a></li>
                     <li><a href="coleções.html" data-lang="collections">Coleções</a></li>
                     <li><a href="carrinho.html" data-lang="Carrinho" class="active">Carrinho</a></li>
+                    
+                    <span id="cart-count" class="cart-count">0</span>
+                    
                     <li><a href="contato.html" data-lang="contact">Contato</a></li>
                     <li class="language-switch">
                         <button id="pt-BR" class="active">PT-BR</button>
@@ -145,34 +148,84 @@
   setInterval(criarBolinha, 100);
 </script>
 
-    <section class="cart-section">
-        <div class="container">
-            <div class="cart-items">
-                <div class="cart-item">
-                    <img src="./img/moletom.webp" alt="Moletom Denim Tears">
-                    <div class="item-details">
-                        <h3 data-lang="cartItem1Title">Moletom Denim Tears</h3>
-                        <p data-lang="cartItem1Price">Preço: R$ 899,00</p>
-                        <div class="quantity-control">
-                            <label for="qty-1" data-lang="quantityLabel">Quantidade:</label>
-                            <input type="number" id="qty-1" value="1" min="1">
-                        </div>
-                        <button class="remove-item" data-lang="removeItem">Remover</button>
-                    </div>
-                </div>
-                <div class="cart-item">
-                    <img src="./img/Camiseta.jpeg" alt="Camiseta Amiri Bar">
-                    <div class="item-details">
-                        <h3 data-lang="cartItem2Title">Camiseta Amiri Bar</h3>
-                        <p data-lang="cartItem2Price">Preço: R$ 549,00</p>
-                        <div class="quantity-control">
-                            <label for="qty-2" data-lang="quantityLabel">Quantidade:</label>
-                            <input type="number" id="qty-2" value="1" min="1">
-                        </div>
-                        <button class="remove-item" data-lang="removeItem">Remover</button>
-                    </div>
-                </div>
-                </div>
+      <section class="cart-section">
+  <div class="container">
+    <div id="carrinho" class="cart-items"></div>
+
+    <div class="cart-summary">
+      <h2>Resumo do Pedido</h2>
+      <div class="summary-line">
+        <span>Subtotal:</span>
+        <span id="subtotal" class="summary-value">R$ 0,00</span>
+      </div>
+      <div class="summary-line">
+        <span>Frete:</span>
+        <span class="summary-value">A calcular</span>
+      </div>
+      <div class="summary-line total">
+        <span>Total:</span>
+        <span id="total" class="summary-value">R$ 0,00</span>
+      </div>
+      <button class="btn primary full-width">Finalizar Compra</button>
+      <button onclick="limparCarrinho()" class="btn secondary full-width">Esvaziar Carrinho</button>
+      <a href="coleções.html" class="btn secondary full-width">Continuar Comprando</a>
+    </div>
+  </div>
+</section>
+
+<script>
+function carregarCarrinho() {
+  let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+  let container = document.getElementById("carrinho");
+  let subtotal = 0;
+  container.innerHTML = "";
+
+  carrinho.forEach((item, index) => {
+    subtotal += item.preco * (item.quantidade || 1);
+
+    let div = document.createElement("div");
+    div.classList.add("cart-item");
+    div.innerHTML = `
+      <img src="${item.imagem}" width="80">
+      <div class="item-details">
+        <h3>${item.nome}</h3>
+        <p>Preço: R$ ${item.preco.toFixed(2)}</p>
+        <div class="quantity-control">
+          <label>Qtd:</label>
+          <input type="number" min="1" value="${item.quantidade || 1}" 
+            onchange="atualizarQuantidade(${index}, this.value)">
+        </div>
+        <button class="remove-item" onclick="removerItem(${index})">Remover</button>
+      </div>
+    `;
+    container.appendChild(div);
+  });
+
+  document.getElementById("subtotal").textContent = "R$ " + subtotal.toFixed(2);
+  document.getElementById("total").textContent = "R$ " + subtotal.toFixed(2);
+}
+
+function removerItem(index) {
+  let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+  carrinho.splice(index, 1);
+  localStorage.setItem("carrinho", JSON.stringify(carrinho));
+  carregarCarrinho();
+}
+
+function atualizarQuantidade(index, novaQtd) {
+  let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+  carrinho[index].quantidade = parseInt(novaQtd);
+  localStorage.setItem("carrinho", JSON.stringify(carrinho));
+  carregarCarrinho();
+}
+
+function limparCarrinho() {
+  localStorage.removeItem("carrinho");
+  carregarCarrinho();
+}
+
+carregarCarrinho();
+</script>
 
             <div class="cart-summary">
                 <h2 data-lang="cartSummaryTitle">Resumo do Pedido</h2>

@@ -5,8 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fire Blend - Contato</title>
     <link rel="stylesheet" href="style.css" />
-    <link rel="shortcut icon" href="assest/img/favicon.ico" type="image/x-icon">
-    
+    <link
+      rel="shortcut icon"
+      href="assest/img/favicon.ico"
+      type="image/x-icon"
+    />
   </head>
   <body>
     <header>
@@ -21,6 +24,7 @@
               <a href="coleções.html" data-lang="collections">Coleções</a>
             </li>
             <li><a href="carrinho.html" data-lang="Carrinho">Carrinho</a></li>
+            <span id="cart-count" class="cart-count">0</span>
             <li>
               <a href="contato.html" data-lang="contact" class="active"
                 >Contato</a
@@ -33,129 +37,132 @@
           </ul>
         </nav>
 
-<div class="search-container">
-    <input 
-      type="text" 
-      placeholder="Buscar roupas, estilos..." 
-      class="search-input" 
-      id="searchInput" 
-      autocomplete="off"
-    />
-    <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#ff7f00" stroke-width="2" width="24" height="24" >
-  <circle cx="11" cy="11" r="7" />
-  <line x1="16.65" y1="16.65" x2="21" y2="21" />
-</svg>
+        <div class="search-container">
+          <input
+            type="text"
+            placeholder="Buscar roupas, estilos..."
+            class="search-input"
+            id="searchInput"
+            autocomplete="off"
+          />
+          <svg
+            class="search-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="#ff7f00"
+            stroke-width="2"
+            width="24"
+            height="24"
+          >
+            <circle cx="11" cy="11" r="7" />
+            <line x1="16.65" y1="16.65" x2="21" y2="21" />
+          </svg>
 
-    <div class="suggestions" id="suggestionsBox"></div>
-  </div>
-
-
+          <div class="suggestions" id="suggestionsBox"></div>
+        </div>
       </div>
     </header>
 
     <script>
-    const roupas = [
-      "Moletom Denim Tears The Cotton Wreath",
-      "Louis Vuitton LV Skate Sneaker Beige White",
-      "Camiseta Louis Vuitton Ready to Wear",
-      "Camiseta Louis Vuitton Ready to Wear",
-      "Gorro Louis Vuitton Gray",
-      "Jaqueta Louis Vuitton Monogram Flower",
-      "Jaqueta Louis Vuitton Bomber Embroidered",
-      "Bermuda Louis Vuitton Jeans Denim",
-      "Cinto Louis Vuitton Monogram Preto",
-      "Jaqueta Louis Vuitton Aviator Monogram",
-      "Bermuda Jeans Louis Vuitton Carpenter",
-      "Camiseta Louis Vuitton Jeans By Tyler",
-      "Colete Jeans",
-      "Mochila Louis Vuitton Christopher x Supreme",
-      "Camisa Polo"
-    ];
+      const roupas = [
+        "Moletom Denim Tears The Cotton Wreath",
+        "Louis Vuitton LV Skate Sneaker Beige White",
+        "Camiseta Louis Vuitton Ready to Wear",
+        "Camiseta Louis Vuitton Ready to Wear",
+        "Gorro Louis Vuitton Gray",
+        "Jaqueta Louis Vuitton Monogram Flower",
+        "Jaqueta Louis Vuitton Bomber Embroidered",
+        "Bermuda Louis Vuitton Jeans Denim",
+        "Cinto Louis Vuitton Monogram Preto",
+        "Jaqueta Louis Vuitton Aviator Monogram",
+        "Bermuda Jeans Louis Vuitton Carpenter",
+        "Camiseta Louis Vuitton Jeans By Tyler",
+        "Colete Jeans",
+        "Mochila Louis Vuitton Christopher x Supreme",
+        "Camisa Polo",
+      ];
 
-    const input = document.getElementById('searchInput');
-    const suggestionsBox = document.getElementById('suggestionsBox');
+      const input = document.getElementById("searchInput");
+      const suggestionsBox = document.getElementById("suggestionsBox");
 
-    function filterSuggestions(value) {
-      if (!value) {
-        suggestionsBox.classList.remove('active');
-        suggestionsBox.innerHTML = '';
-        return;
+      function filterSuggestions(value) {
+        if (!value) {
+          suggestionsBox.classList.remove("active");
+          suggestionsBox.innerHTML = "";
+          return;
+        }
+        const filtered = roupas.filter((item) =>
+          item.toLowerCase().includes(value.toLowerCase())
+        );
+        if (filtered.length === 0) {
+          suggestionsBox.classList.remove("active");
+          suggestionsBox.innerHTML = "";
+          return;
+        }
+        suggestionsBox.innerHTML = filtered
+          .map((item) => `<div class="suggestion-item">${item}</div>`)
+          .join("");
+        suggestionsBox.classList.add("active");
       }
-      const filtered = roupas.filter(item =>
-        item.toLowerCase().includes(value.toLowerCase())
-      );
-      if (filtered.length === 0) {
-        suggestionsBox.classList.remove('active');
-        suggestionsBox.innerHTML = '';
-        return;
-      }
-      suggestionsBox.innerHTML = filtered.map(item => `<div class="suggestion-item">${item}</div>`).join('');
-      suggestionsBox.classList.add('active');
-    }
 
-    input.addEventListener('input', () => {
-      filterSuggestions(input.value);
-    });
+      input.addEventListener("input", () => {
+        filterSuggestions(input.value);
+      });
 
-    suggestionsBox.addEventListener('click', (e) => {
-      if (e.target.classList.contains('suggestion-item')) {
-        input.value = e.target.textContent;
-        suggestionsBox.classList.remove('active');
-      }
-    });
+      suggestionsBox.addEventListener("click", (e) => {
+        if (e.target.classList.contains("suggestion-item")) {
+          input.value = e.target.textContent;
+          suggestionsBox.classList.remove("active");
+        }
+      });
 
-    // Fecha sugestões ao clicar fora
-    document.addEventListener('click', (e) => {
-      if (!e.target.closest('.search-container')) {
-        suggestionsBox.classList.remove('active');
-      }
-    });
-  </script>
-
+      // Fecha sugestões ao clicar fora
+      document.addEventListener("click", (e) => {
+        if (!e.target.closest(".search-container")) {
+          suggestionsBox.classList.remove("active");
+        }
+      });
+    </script>
 
     <section class="hero-section small-hero">
       <div class="container">
         <div class="hero-content">
           <h1 data-lang="contactTitle">Fale Conosco</h1>
-          <p data-lang="contactSubtitle">
-           
-          </p>
+          <p data-lang="contactSubtitle"></p>
         </div>
       </div>
     </section>
 
     <script>
-  function criarBolinha() {
-    const bolinha = document.createElement('div');
-    bolinha.classList.add('bolinha');
+      function criarBolinha() {
+        const bolinha = document.createElement("div");
+        bolinha.classList.add("bolinha");
 
-    // Define tamanho aleatório
-    const tamanho = Math.random() * 25 + 5; // entre 5px e 25px
-    bolinha.style.width = tamanho +  'px';
-    bolinha.style.height = tamanho + 'px';
+        // Define tamanho aleatório
+        const tamanho = Math.random() * 25 + 5; // entre 5px e 25px
+        bolinha.style.width = tamanho + "px";
+        bolinha.style.height = tamanho + "px";
 
-    // Posição horizontal aleatória
-    bolinha.style.left = Math.random() * (2000 - tamanho) + 'px';
-    bolinha.style.top = Math.random() * (475 - tamanho) + 'px';
-    
+        // Posição horizontal aleatória
+        bolinha.style.left = Math.random() * (2000 - tamanho) + "px";
+        bolinha.style.top = Math.random() * (475 - tamanho) + "px";
 
-   
+        // Duração da animação aleatória
+        const duracao = Math.random() * 3 + 2; // entre 2s e 5s
+        bolinha.style.animationDuration = duracao + "s";
 
-    // Duração da animação aleatória
-    const duracao = Math.random() * 3 + 2; // entre 2s e 5s
-    bolinha.style.animationDuration = duracao + 's';
+        document.body.appendChild(bolinha);
 
-    document.body.appendChild(bolinha);
+        // Remove do DOM após a animação
+        setTimeout(() => {
+          bolinha.remove();
+        }, duracao * 1000);
+      }
 
-    // Remove do DOM após a animação
-    setTimeout(() => {
-      bolinha.remove();
-    }, duracao * 1000);
-  }
-
-  // Criar bolinhas continuamente a cada 100ms
-  setInterval(criarBolinha, 100);
-</script>
+      // Criar bolinhas continuamente a cada 100ms
+      setInterval(criarBolinha, 100);
+    </script>
 
     <section class="contact-section">
       <div class="container">
