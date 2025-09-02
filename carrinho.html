@@ -166,12 +166,137 @@
         <span>Total:</span>
         <span id="total" class="summary-value">R$ 0,00</span>
       </div>
-      <button class="btn primary full-width">Finalizar Compra</button>
+      <button class="btn primary full-width"onclick="finalizarCompra()">Finalizar Compra</button>
       <button onclick="limparCarrinho()" class="btn secondary full-width">Esvaziar Carrinho</button>
       <a href="coleções.html" class="btn secondary full-width">Continuar Comprando</a>
     </div>
   </div>
 </section>
+
+<div id="pixModal" class="pix-modal">
+  <div class="pix-box">
+    <h2>Pagamento via PIX</h2>
+    <p><strong>Total:</strong> <span id="pixTotal"></span></p>
+
+    <img id="pixQrCode" src="" alt="QR Code PIX" width="220" height="220" />
+
+    <p><strong>Copia e Cola:</strong></p>
+    <textarea id="pixCopiaCola" readonly></textarea>
+    <button class="btn primary" onclick="copiarPix()">Copiar Código PIX</button>
+    <button class="btn secondary" onclick="fecharModal()">Fechar</button>
+  </div>
+</div>
+
+<style>
+/* Fundo escuro */
+.pix-modal {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 9999;
+}
+
+/* Caixa central */
+.pix-box {
+  background: #fff;
+  padding: 20px;
+  border-radius: 16px;
+  width: 350px;
+  max-width: 95%;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+.pix-box h2 {
+  margin-bottom: 10px;
+}
+.pix-box textarea {
+  width: 100%;
+  height: 80px;
+  margin: 10px 0;
+  resize: none;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+.pix-box button {
+  margin-top: 8px;
+  width: 100%;
+}
+</style>
+
+<script>
+// Função CRC16 para PIX
+function calcularCRC16(payload) {
+  let polinomio = 0x1021;
+  let resultado = 0xFFFF;
+  for (let offset = 0; offset < payload.length; offset++) {
+    resultado ^= (payload.charCodeAt(offset) << 8);
+    for (let bitwise = 0; bitwise < 8; bitwise++) {
+      if ((resultado <<= 1) & 0x10000) resultado ^= polinomio;
+      resultado &= 0xFFFF;
+    }
+  }
+  return resultado.toString(16).toUpperCase().padStart(4, '0');
+}
+
+// Gera payload PIX oficial
+function gerarPayload(valor) {
+  let chavePix = "seu-email@pix.com"; // 🔑 SUA CHAVE PIX AQUI
+  let nomeRecebedor = "FIRE BLEND";   // até 25 caracteres
+  let cidade = "SAO PAULO";
+
+  let payload =
+    "000201" +
+    "26" + (4 + chavePix.length).toString().padStart(2,"0") +
+      "0014BR.GOV.BCB.PIX" +
+      "01" + chavePix.length.toString().padStart(2,"0") + chavePix +
+    "52040000" +
+    "5303986" +
+    "54" + valor.toFixed(2).toString().length.toString().padStart(2,"0") + valor.toFixed(2) +
+    "5802BR" +
+    "59" + nomeRecebedor.length.toString().padStart(2,"0") + nomeRecebedor +
+    "60" + cidade.length.toString().padStart(2,"0") + cidade +
+    "62070503***" +
+    "6304";
+
+  let crc = calcularCRC16(payload);
+  return payload + crc;
+}
+
+// Abrir modal PIX
+function finalizarCompra() {
+  let totalStr = document.getElementById("total").textContent.replace("R$", "").replace(",", ".").trim();
+  let total = parseFloat(totalStr);
+
+  let payload = gerarPayload(total);
+
+  document.getElementById("pixTotal").textContent = "R$ " + total.toFixed(2);
+  document.getElementById("pixCopiaCola").value = payload;
+  document.getElementById("pixQrCode").src =
+    "https://chart.googleapis.com/chart?cht=qr&chs=220x220&chl=" + encodeURIComponent(payload);
+
+  document.getElementById("pixModal").style.display = "flex";
+}
+
+// Copiar código PIX
+function copiarPix() {
+  let campo = document.getElementById("pixCopiaCola");
+  campo.select();
+  document.execCommand("copy");
+  alert("Código PIX copiado!");
+}
+
+// Fechar modal
+function fecharModal() {
+  document.getElementById("pixModal").style.display = "none";
+}
+</script>
+
+
+
 
 <script>
 function carregarCarrinho() {
@@ -226,26 +351,6 @@ function limparCarrinho() {
 
 carregarCarrinho();
 </script>
-
-            <div class="cart-summary">
-                <h2 data-lang="cartSummaryTitle">Resumo do Pedido</h2>
-                <div class="summary-line">
-                    <span data-lang="subtotal">Subtotal:</span>
-                    <span class="summary-value">R$ 1448,00</span>
-                </div>
-                <div class="summary-line">
-                    <span data-lang="shipping">Frete:</span>
-                    <span class="summary-value" data-lang="shippingCost">A calcular</span>
-                </div>
-                <div class="summary-line total">
-                    <span data-lang="total">Total:</span>
-                    <span class="summary-value">R$ 1448,00</span>
-                </div>
-                <button class="btn primary full-width" data-lang="checkoutBtn">Finalizar Compra</button>
-                <a href="index.html" class="btn secondary full-width" data-lang="continueShopping">Continuar Comprando</a>
-            </div>
-        </div>
-    </section>
 
     <section class="cta-banner">
         <div class="container">
