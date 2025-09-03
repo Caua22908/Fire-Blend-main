@@ -126,7 +126,7 @@
     bolinha.style.height = tamanho + 'px';
 
     // Posição horizontal aleatória
-    bolinha.style.left = Math.random() * (2000 - tamanho) + 'px';
+    bolinha.style.left = Math.random() * (1900 - tamanho) + 'px';
     bolinha.style.top = Math.random() * (475 - tamanho) + 'px';
     
 
@@ -244,9 +244,9 @@ function calcularCRC16(payload) {
 
 // Gera payload PIX oficial
 function gerarPayload(valor) {
-  let chavePix = "seu-email@pix.com"; // 🔑 SUA CHAVE PIX AQUI
+  let chavePix = "00020126580014BR.GOV.BCB.PIX0136149720d3-f3be-47e6-b1fe-fc1874b3c3fb5204000053039865802BR5921Caua Ramalho de Sousa6009SAO PAULO62140510UGGAETrWia6304C4B1"; 
   let nomeRecebedor = "FIRE BLEND";   // até 25 caracteres
-  let cidade = "SAO PAULO";
+  let cidade = "Brasília";
 
   let payload =
     "000201" +
@@ -275,8 +275,7 @@ function finalizarCompra() {
 
   document.getElementById("pixTotal").textContent = "R$ " + total.toFixed(2);
   document.getElementById("pixCopiaCola").value = payload;
-  document.getElementById("pixQrCode").src =
-    "https://chart.googleapis.com/chart?cht=qr&chs=220x220&chl=" + encodeURIComponent(payload);
+  document.getElementById("pixQrCode").src = "assest/img/WhatsApp Image 2025-09-03 at 14.38.48.jpeg";
 
   document.getElementById("pixModal").style.display = "flex";
 }
