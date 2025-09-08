@@ -658,6 +658,21 @@ footer .social-media a:hover {
   font-size: 1em;
 }
 
+.collection-item img {
+  transform: scale(1.1);  /* 🔍 já começa aproximada */
+  transition: object-position 1.4s ease; 
+  cursor: pointer; /* cursor de mãozinha */
+  border-radius: 12px; /* opcional: cantos arredondados */
+  overflow: hidden;
+    height: 300px;
+    
+}
+
+.collection-item img:hover {
+ object-position: 50% 5%; /* muda o foco sem crescer a box */
+  
+}
+
 /* Responsividade para a página de coleções */
 @media (max-width: 900px) {
   .hero-section.small-hero .hero-content h1 {

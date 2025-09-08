@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
       home: "Início",
       newArrivals: "Novidades",
       collections: "Coleções",
-      shop: "Loja",
+      shop: "Carrinho",
       contact: "Contato",
       // Hero Section
       heroTitle: "Defina Seu Estilo. Redefina a Moda.",
@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
       home: "Home",
       newArrivals: "New Arrivals",
       collections: "Collections",
-      shop: "Shop",
+      shop: "Cart",
       contact: "Contact",
       // Hero Section
       heroTitle: "Define Your Style. Redefine Fashion.",
