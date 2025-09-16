@@ -517,13 +517,14 @@ footer .social-media a:hover {
 
   .hero-image {
     text-align: center;
+
   }
 
-  nav ul {
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 15px;
+  .hero-image img {
+  max-width: 90%;
+  margin: 5%;
   }
+
 
   nav ul li {
     margin: 10px 15px;
@@ -546,9 +547,10 @@ footer .social-media a:hover {
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
   .logo a {
-    font-size: 2.2em;
+    font-size: 0em;
+    
   }
   nav ul li {
     margin: 8px 10px;
@@ -728,7 +730,7 @@ footer .social-media a:hover {
   padding-bottom: 0;
 }
 
-.cart-item img {
+.cart-item img {<style
   width: 100px;
   height: 100px;
   object-fit: cover;
@@ -864,7 +866,7 @@ footer .social-media a:hover {
 }
 
 /* Responsividade para o carrinho */
-@media (max-width: 768px) {
+@media (max-width: 768px) 
   .cart-section .container {
     flex-direction: column;
     align-items: center;
@@ -1138,7 +1140,7 @@ footer .social-media a:hover {
   box-shadow: 0 0 0 0 transparent;
 }
 .search-input:focus {
-  border-color: #ff7f00;
+  border-color: #ff7f00;<style>
   box-shadow: 0 0 8px #ff7f00aa;
 }
 .search-icon {
@@ -1180,7 +1182,8 @@ footer .social-media a:hover {
   transition: background-color 0.2s ease;
   font-weight: 500;
   color: #ffffff;
-   
+}
+
 .suggestion-item:hover {
   background-color: #ffffff;
   color: #ff7f00;
@@ -1233,4 +1236,58 @@ footer .social-media a:hover {
 .pix-box button {
   margin-top: 8px;
   width: 100%;
+}
+
+/* Ícone hambúrguer */
+.menu-icon {
+  font-size: 2rem;
+  cursor: pointer;
+  position: fixed;
+  top: 15px;
+  left: 20px;
+  z-index: 1001;
+  display: none; /* só aparece em telas pequenas */
+}
+
+/* Menu lateral escondido */
+.side-menu {
+  position: fixed;
+  top: 0;
+  left: -250px; /* começa fora da tela */
+  width: 220px;
+  height: 100%;
+  background: #222;
+  display: flex;
+  flex-direction: column;
+  padding-top: 60px;
+  transition: left 0.3s ease;
+  z-index: 1000;
+}
+
+.side-menu a {
+  padding: 15px 20px;
+  text-decoration: none;
+  color: white;
+  font-size: 18px;
+  transition: background 0.2s;
+}
+
+.side-menu a:hover {
+  background: #ff5e00;
+}
+
+/* Mostrar menu quando ativo */
+.side-menu.active {
+  left: 0;
+}
+
+/* Só mostrar no mobile */
+@media (max-width: 768px) {
+  .menu-icon {
+    display: block;
+  }
+
+  nav ul {
+    display: none; /* esconde o menu original se houver */
+  }
 }

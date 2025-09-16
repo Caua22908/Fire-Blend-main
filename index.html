@@ -50,6 +50,29 @@
 
     </header>
 
+    
+  <div class="menu-container">
+    <!-- Ícone hambúrguer -->
+    <div class="menu-icon" onclick="toggleMenu()">
+      ☰
+    </div>
+
+    <!-- Menu lateral -->
+    <nav id="sideMenu" class="side-menu">
+      <a href="index.html">Início</a>
+      <a href="coleções.html">Coleções</a>
+      <a href="carrinho.html">Carrinho</a>
+      <a href="contato.html">Contato</a>
+    </nav>
+  </div>
+
+
+<script>
+  function toggleMenu() {
+    document.getElementById("sideMenu").classList.toggle("active");
+  }
+</script>
+
     <script>
     const roupas = [
       "Moletom Denim Tears The Cotton Wreath",
@@ -135,8 +158,7 @@
     bolinha.style.height = tamanho + 'px';
 
     // Posição horizontal aleatória
-       bolinha.style.left = Math.random() * (1800 - tamanho) + 'px';
-   bolinha.style.top = Math.random() * (1100) + 'px';
+       bolinha.style.left = Math.random() * (window.innerWidth - tamanho) + 'px';
    
    
     
