@@ -1240,6 +1240,7 @@ footer .social-media a:hover {
 
 /* Ícone hambúrguer */
 .menu-icon {
+  color: var(--orange-accent);
   font-size: 2rem;
   cursor: pointer;
   position: fixed;
