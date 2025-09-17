@@ -1292,3 +1292,27 @@ footer .social-media a:hover {
     display: none; /* esconde o menu original se houver */
   }
 }
+
+/* responsividade produtos */
+@media (max-width: 768px) {
+  .grid-produtos {
+    width: 100%;
+    margin-bottom: 20px;
+    flex-direction: column;
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .produto {
+    width: 80%;
+    margin: 30px;
+  }
+
+  .hero-imagem img {
+    display: none;
+  }
+
+  .hero-imagem2 img {
+    display: none;
+  }
+}

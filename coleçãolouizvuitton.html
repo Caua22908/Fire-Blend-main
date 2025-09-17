@@ -52,6 +52,31 @@
         
     </header>
 
+    
+
+
+    <div class="menu-container">
+    <!-- Ícone hambúrguer -->
+    <div class="menu-icon" onclick="toggleMenu()">
+      ☰
+    </div>
+
+    <!-- Menu lateral -->
+    <nav id="sideMenu" class="side-menu">
+      <a href="index.html">Início</a>
+      <a href="coleções.html">Coleções</a>
+      <a href="carrinho.html">Carrinho</a>
+      <a href="contato.html">Contato</a>
+    </nav>
+  </div>
+
+
+<script>
+  function toggleMenu() {
+    document.getElementById("sideMenu").classList.toggle("active");
+  }
+</script>
+
     <section class="hero-section small-hero">
         <div class="container">
             <div class="hero-content">
