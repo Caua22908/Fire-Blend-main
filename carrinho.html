@@ -138,37 +138,6 @@
         </div>
     </section>
 
-    <script>
-  function criarBolinha() {
-    const bolinha = document.createElement('div');
-    bolinha.classList.add('bolinha');
-
-    // Define tamanho aleatório
-    const tamanho = Math.random() * 25 + 5; // entre 5px e 25px
-    bolinha.style.width = tamanho +  'px';
-    bolinha.style.height = tamanho + 'px';
-
-    // Posição horizontal aleatória
-    bolinha.style.left = Math.random() * (window.innerWidth - tamanho) + 'px';
-    bolinha.style.top = Math.random() * (475 - tamanho) + 'px';
-
-   
-
-    // Duração da animação aleatória
-    const duracao = Math.random() * 3 + 2; // entre 2s e 5s
-    bolinha.style.animationDuration = duracao + 's';
-
-    document.body.appendChild(bolinha);
-
-    // Remove do DOM após a animação
-    setTimeout(() => {
-      bolinha.remove();
-    }, duracao * 1000);
-  }
-
-  // Criar bolinhas continuamente a cada 100ms
-  setInterval(criarBolinha, 100);
-</script>
 
       <section class="cart-section">
   <div class="container">
@@ -393,5 +362,6 @@ carregarCarrinho();
     </footer>
 
     <script src="script.js"></script>
+    <script src="inicial.js"></script>
 </body>
 </html>

@@ -147,40 +147,7 @@
             </div>
         </div>
     </section>
-    <script>
-  function criarBolinha() {
-    const bolinha = document.createElement('div');
-    bolinha.classList.add('bolinha');
-
-    // Define tamanho aleatório
-    const tamanho = Math.random() * 20 + 15; // entre 5px e 25px
-    bolinha.style.width = tamanho + 'px';
-    bolinha.style.height = tamanho + 'px';
-
-    // Posição horizontal aleatória
-       bolinha.style.left = Math.random() * (window.innerWidth - tamanho) + 'px';
-      bolinha.style.top = Math.random() * (1050 - tamanho) + "px";
    
-    
-  
-
-
-    // Duração da animação aleatória
-    const duracao = Math.random() * 3 + 2; // entre 2s e 5s
-    bolinha.style.animationDuration = duracao + 's';
-
-    document.body.appendChild(bolinha);lock;
-
-    // Remove do DOM após a animação
-    setTimeout(() => {
-      bolinha.remove();
-    }, duracao * 1000);
-  }
-
-  // Criar bolinhas continuamente a cada 100ms
-  setInterval(criarBolinha, 100);
-</script>
-
     <section class="featured-products">
         <div class="container">
             <h2 data-lang="featuredTitle">Destaques da Temporada</h2>
@@ -477,7 +444,8 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 </script>
-    
+
+<script src="inicial.js"></script>
 
 </body>
 </html>
