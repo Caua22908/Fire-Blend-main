@@ -1,151 +1,48 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fire Blend - Estilo Global Sem Limites</title>
-    <link rel="shortcut icon" href="assest/img/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login — Fire Blend</title>
+    <link rel="stylesheet" href="login.css" />
+  </head>
+  <body>
+    <div class="login-container">
+      <div class="login-box">
+        <h1 class="logo">🔥 Fire Blend</h1>
+        <h2>Entrar na sua conta</h2>
 
-    
-</head>
-<body>
-    <header>
-        <div class="container">
-            <div class="logo">
-                <a href="#"><span class="logo-accent">Fire </span>Blend</a>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="index.html" data-lang="home" class="active">Início</a></li>
+        <form id="loginForm">
+          <div class="input-group">
+            <label for="email">E-mail ou Usuário</label>
+            <input
+              type="text"
+              id="email"
+              placeholder="Digite seu e-mail"
+              required
+            />
+          </div>
 
-                    <li><a href="coleções.html"  data-lang="collections">Coleções</a></li>
-                    <li><a href="carrinho.html" data-lang="Cart" >Carrinho</a></li>
-                    
-                    <li><a href="contato.html" data-lang="contact">Contato</a></li>
-                    <li class="language-switch">
-                      <button id="pt-BR" class="active">PT-BR</button>
-                      <button id="en-US" >EN-US</button>
-                    </li>
-                  
-                </ul>
-            </nav>
-            <div class="search-container">
-    <input 
-      type="text" 
-      placeholder="Buscar roupas, estilos..." 
-      class="search-input" 
-      id="searchInput" 
-      autocomplete="off"
-    />
-    <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#ff7f00" stroke-width="2" width="24" height="24" >
-  <circle cx="11" cy="11" r="7" />
-  <line x1="16.65" y1="16.65" x2="21" y2="21" />
-</svg>
+          <div class="input-group">
+            <label for="password">Senha</label>
+            <input
+              type="password"
+              id="password"
+              placeholder="Digite sua senha"
+              required
+            />
+          </div>
 
-    <div class="suggestions" id="suggestionsBox"></div>
-  </div>
-    
+          <button type="submit" class="login-btn">Entrar</button>
 
-    </header>
-
-    
-  <div class="menu-container">
-    <!-- Ícone hambúrguer -->
-    <div class="menu-icon" onclick="toggleMenu()">
-      ☰
+          <div class="extra-links">
+            <a href="#">Esqueci minha senha</a>
+            <a href="#">Criar nova conta</a>
+          </div>
+        </form>
+      </div>
     </div>
 
-    <!-- Menu lateral -->
-    <nav id="sideMenu" class="side-menu">
-      <a href="index.html">Início</a>
-      <a href="coleções.html">Coleções</a>
-      <a href="carrinho.html">Carrinho</a>
-      <a href="contato.html">Contato</a>
-    </nav>
-  </div>
-
-    <section class="hero-section">
-        <div class="container">
-            <div class="hero-content">
-                <h1 data-lang="heroTitle">Defina Seu Estilo. Redefina a Moda.</h1>
-                <p data-lang="heroSubtitle">Descubra uma curadoria exclusiva de peças internacionais, onde o design encontra a inovação.</p>
-                <a href="coleções.html" class="btn primary" data-lang="exploreBtn">Explorar Agora</a>
-            </div>
-            <div class="hero-image">
-                <img src="assest/img/Gemini_Generated_Image_x4wkoox4wkoox4wk.png" alt="Modelo de moda com roupas de design inovador">
-            </div>
-        </div>
-    </section>
-   
-    <section class="featured-products">
-        <div class="container">
-            <h2 data-lang="featuredTitle">Destaques da Temporada</h2>
-            <p data-lang="featuredSubtitle">Cortes ousados, texturas inovadoras e cores que marcam.</p>
-            <div class="product-grid">
-                <div class="product-item">
-                    <img src="assest/img/moletom.webp" alt="Moletom">
-                    <h3><span data-lang="MoletomTitle">Moletom Denim Tears</span></h3>
-                    <p data-lang="MoletomDesc">Toque de audácia para seu dia a dia.</p>
-                    <span class="price">R$ 899,00</span>
-                    <a href="#" class="btn secondary" data-lang="viewDetails">Ver Detalhes</a>
-                </div>
-                <div class="product-item">
-                    <img src="assest/img/Camiseta.jpeg" alt="Camiseta com design moderno">
-                    <h3><span data-lang="CamisetaTitle">Camiseta Amiri Bar</span></h3>
-                    <p data-lang="pantsDesc">Conforto e forma em perfeita harmonia.</p>
-                    <span class="price">R$ 549,00</span>
-                    <a href="#" class="btn secondary" data-lang="viewDetails">Ver Detalhes</a>
-                </div>
-                <div class="product-item">
-                    <img src="assest/img/jaqueta.jpeg" alt="Jaqueta Branca de grife">
-                    <h3><span data-lang="JaquetaTitle">Jaqueta Palace Palamat</span></h3>
-                    <p data-lang="jacketDesc">Versatilidade e elegância para qualquer ocasião.</p>
-                    <span class="price">R$ 799,00</span>
-                    <a href="#" class="btn secondary" data-lang="viewDetails">Ver Detalhes</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="cta-banner">
-        <div class="container">
-            <h2 data-lang="ctaBannerTitle">Experiência Única de Compras</h2>
-            <p data-lang="ctaBannerSubtitle">Peças selecionadas a dedo para um guarda-roupa que inspira.</p>
-            <a href="coleções.html" class="btn primary" data-lang="shopCollections">Comprar Coleções</a>
-        </div>
-    </section>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 Fire Blend Moda. Todos os direitos reservados.</p>
-            <div class="social-media">
-                <a href="#">Facebook</a>
-                <a href="#">Instagram</a>
-                <a href="#">Pinterest</a>
-            </div>
-        </div>
-    </footer>
-
-<script src="script.js"></script>
-
-<div id="productModal" class="modal">
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <img id="modalImage" src="" alt="Imagem do Produto">
-    <h3 id="modalTitle"></h3>
-    <p id="modalDescription"></p>
-    <span id="modalPrice" class="price"></span>
-    <br>
-    <a href="#" class="btn secondary add-to-cart">Carrinho</a>
-  </div>
-
-</div>
-
-
-
-<script src="inicial.js"></script>
-
-</body>
+    <script src="login.js"></script>
+  </body>
 </html>

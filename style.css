@@ -1317,99 +1317,16 @@ footer .social-media a:hover {
   }
 }
 
+/* responsividade produtos */
+@media (max-width: 768px) {
+  .modal-content {
 
+    width: 10%;
+    flex-direction: column;
+    display: flex;
+    justify-content: flex-start;
+  }
 
-/* Estilo do modal */
-.modal {
-  display: none; 
-  position: fixed;
-  z-index: 1000;
-  padding-top: 60px;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background: rgba(0,0,0,0.6);
 }
 
-.modal-content {
-  background: #a7a7a7;
-  margin: auto;
-  padding: 20px;
-  border-radius: 12px;
-  width: 400px;
-  text-align: center;
-  animation: fadeIn 0.3s ease-in-out;
-  border: #ff6600 3px solid;
-}
 
-.modal-content img {
-  max-width: 100%;
-  border-radius: 8px;
-}
-
-.modal-image-container {
-  position: relative;
-  overflow: hidden;
-  display: inline-block;
-  width: 100%;
-  max-width: 350px;
-  border-radius: 10px;
-  cursor: zoom-in;
-}
-
-.modal-image-container img {
-  width: 100%;
-  transition: transform 0.2s ease;
-  transform-origin: center center;
-}
-
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.close:hover {
-  color: #000;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.9); }
-  to { opacity: 1; transform: scale(1); }
-}
-
-/* Animação do preço */
-@keyframes pricePulse {
-  0% { transform: scale(1); color: #000; }
-  50% { transform: scale(1.3); color: #ff7f00; }
-  100% { transform: scale(1); color: #000; }
-}
-
-.price-animate {
-  animation: pricePulse 0.6s ease-in-out;
-}
-
-/* Fonte personalizada para o preço */
-#modalPrice {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 2rem;
-  font-weight: bold;
-  color: #ff7f00;
-  display: inline-block;
-  margin-top: 10px;
-}
-
-/* Animação em loop suave */
-@keyframes pricePulse {
-  0% { transform: scale(1); text-shadow: 0 0 5px rgba(0, 0, 0, 0.4); }
-  50% { transform: scale(1.15); text-shadow: 0 0 15px rgba(0, 0, 0, 0.8); }
-  100% { transform: scale(1); text-shadow: 0 0 5px rgba(0, 0, 0, 0.4); }
-}
-
-.price-animate {
-  animation: pricePulse 1.5s ease-in-out infinite;
-}
