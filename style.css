@@ -295,18 +295,19 @@ nav ul li a.active {
   margin: 10%;
 }
 
-    .hero-image img {
-    
-      position: relative;
-      animation: rotate 3s infinite alternate ease-in-out;
-    }
+.hero-image img {
+  position: relative;
+  animation: rotate 3s infinite alternate ease-in-out;
+}
 
-    @keyframes rotate {
-      from { transform: translateY(0px); }
-      to   { transform: translateY(30px); }
-
-
-    }
+@keyframes rotate {
+  from {
+    transform: translateY(0px);
+  }
+  to {
+    transform: translateY(30px);
+  }
+}
 
 /* --- Keyframe Animations --- */
 @keyframes fadeInSlideRight {
@@ -517,14 +518,12 @@ footer .social-media a:hover {
 
   .hero-image {
     text-align: center;
-
   }
 
   .hero-image img {
-  max-width: 90%;
-  margin: 5%;
+    max-width: 90%;
+    margin: 5%;
   }
-
 
   nav ul li {
     margin: 10px 15px;
@@ -550,7 +549,6 @@ footer .social-media a:hover {
 @media (max-width: 700px) {
   .logo a {
     font-size: 0em;
-    
   }
   nav ul li {
     margin: 8px 10px;
@@ -661,18 +659,16 @@ footer .social-media a:hover {
 }
 
 .collection-item img {
-  transform: scale(1.1);  /* 🔍 já começa aproximada */
-  transition: object-position 1.4s ease; 
+  transform: scale(1.1); /* 🔍 já começa aproximada */
+  transition: object-position 1.4s ease;
   cursor: pointer; /* cursor de mãozinha */
   border-radius: 12px; /* opcional: cantos arredondados */
   overflow: hidden;
-    height: 300px;
-    
+  height: 300px;
 }
 
 .collection-item img:hover {
- object-position: 50% 5%; /* muda o foco sem crescer a box */
-  
+  object-position: 50% 5%; /* muda o foco sem crescer a box */
 }
 
 /* Responsividade para a página de coleções */
@@ -730,7 +726,7 @@ footer .social-media a:hover {
   padding-bottom: 0;
 }
 
-.cart-item img {<style
+.cart-item img {
   width: 100px;
   height: 100px;
   object-fit: cover;
@@ -866,7 +862,7 @@ footer .social-media a:hover {
 }
 
 /* Responsividade para o carrinho */
-@media (max-width: 768px) 
+@media (max-width: 768px) {
   .cart-section .container {
     flex-direction: column;
     align-items: center;
@@ -1057,11 +1053,6 @@ footer .social-media a:hover {
   }
 }
 /* Coleção Louiz Vuitton */
-<style > body {
-  font-family: Arial, sans-serif;
-  background: #ff5e00;
-  margin: 20px;
-}
 
 .grid-produtos {
   display: grid;
@@ -1140,7 +1131,7 @@ footer .social-media a:hover {
   box-shadow: 0 0 0 0 transparent;
 }
 .search-input:focus {
-  border-color: #ff7f00;<style>
+  border-color: #ff7f00;
   box-shadow: 0 0 8px #ff7f00aa;
 }
 .search-icon {
@@ -1169,7 +1160,7 @@ footer .social-media a:hover {
   box-shadow: 0 4px 12px rgb(0, 0, 0);
   max-height: 180px;
   overflow-y: auto;
-  z-index: 9999; /* bem acima de tudo */s
+  z-index: 9999; /* bem acima de tudo */
   border-top: 1px solid #302828;
   display: none;
 }
@@ -1204,10 +1195,14 @@ footer .social-media a:hover {
 .pix-modal {
   display: none;
   position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.6);
-  display: flex; align-items: center; justify-content: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   z-index: 9999;
 }
 
@@ -1219,7 +1214,7 @@ footer .social-media a:hover {
   width: 350px;
   max-width: 95%;
   text-align: center;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 .pix-box h2 {
   margin-bottom: 10px;
@@ -1320,13 +1315,31 @@ footer .social-media a:hover {
 /* responsividade produtos */
 @media (max-width: 768px) {
   .modal-content {
-
     width: 10%;
     flex-direction: column;
     display: flex;
     justify-content: flex-start;
   }
-
 }
 
+/* Botão login */
 
+.login-container #Login {
+  background: none;
+  color: var(--text-light);
+  border: 1px solid var(--text-light);
+  padding: 8px 12px;
+  margin-left: 10px;
+  cursor: pointer;
+  font-size: 0.9em;
+
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.login-container #Login:hover {
+  background-color: #e06e00;
+  color: #fff;
+  border-color: #e06e00;
+}

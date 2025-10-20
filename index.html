@@ -1,48 +1,496 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login — Fire Blend</title>
-    <link rel="stylesheet" href="login.css" />
-  </head>
-  <body>
-    <div class="login-container">
-      <div class="login-box">
-        <h1 class="logo">🔥 Fire Blend</h1>
-        <h2>Entrar na sua conta</h2>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fire Blend - Estilo Global Sem Limites</title>
+    <link rel="shortcut icon" href="assest/img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 
-        <form id="loginForm">
-          <div class="input-group">
-            <label for="email">E-mail ou Usuário</label>
-            <input
-              type="text"
-              id="email"
-              placeholder="Digite seu e-mail"
-              required
-            />
-          </div>
+    
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="#"><span class="logo-accent">Fire </span>Blend</a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html" data-lang="home" class="active">Início</a></li>
 
-          <div class="input-group">
-            <label for="password">Senha</label>
-            <input
-              type="password"
-              id="password"
-              placeholder="Digite sua senha"
-              required
-            />
-          </div>
+                    <li><a href="coleções.html"  data-lang="collections">Coleções</a></li>
+                    <li><a href="carrinho.html" data-lang="Cart" >Carrinho</a></li>
 
-          <button type="submit" class="login-btn">Entrar</button>
+                    <li><a href="contato.html" data-lang="contact">Contato</a></li>
+                    <li class="language-switch">
+                      <button id="pt-BR" class="active">PT-BR</button>
+                      <button id="en-US">EN-US</button>
+                    </li>
+                  
+                </ul>
+            </nav>
+          <div class="search-container">
+            
+            <input 
+              type="text" 
+              placeholder="Buscar roupas, estilos..." 
+              class="search-input" 
+              id="searchInput" 
+      autocomplete="off"
+    />
+    <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#ff7f00" stroke-width="2" width="24" height="24" >
+  <circle cx="11" cy="11" r="7" />
+  <line x1="16.65" y1="16.65" x2="21" y2="21" />
+</svg>
 
-          <div class="extra-links">
-            <a href="#">Esqueci minha senha</a>
-            <a href="#">Criar nova conta</a>
-          </div>
-        </form>
-      </div>
+    <div class="suggestions" id="suggestionsBox"></div>
+    
+  </div>
+        <div class="login-container">
+          <a href="login.html"  id="Login" class="active">Login</a>
+
+        </div>
+</header>
+
+
+<div class="menu-container">
+    <!-- Ícone hambúrguer -->
+    <div class="menu-icon" onclick="toggleMenu()">
+      ☰
     </div>
 
-    <script src="login.js"></script>
-  </body>
+    <!-- Menu lateral -->
+    <nav id="sideMenu" class="side-menu">
+      <a href="index.html">Início</a>
+      <a href="coleções.html">Coleções</a>
+      <a href="carrinho.html">Carrinho</a>
+      <a href="contato.html">Contato</a>
+    </nav>
+    
+  </div>
+
+
+<script>
+  function toggleMenu() {
+    document.getElementById("sideMenu").classList.toggle("active");
+  }
+</script>
+
+    <script>
+    const roupas = [
+      "Moletom Denim Tears The Cotton Wreath",
+      "Louis Vuitton LV Skate Sneaker Beige White",
+      "Camiseta Louis Vuitton Ready to Wear",
+      "Camiseta Louis Vuitton Ready to Wear",
+      "Gorro Louis Vuitton Gray",
+      "Jaqueta Louis Vuitton Monogram Flower",
+      "Jaqueta Louis Vuitton Bomber Embroidered",
+      "Bermuda Louis Vuitton Jeans Denim",
+      "Cinto Louis Vuitton Monogram Preto",
+      "Jaqueta Louis Vuitton Aviator Monogram",
+      "Bermuda Jeans Louis Vuitton Carpenter",
+      "Camiseta Louis Vuitton Jeans By Tyler",
+      "Colete Jeans",
+      "Mochila Louis Vuitton Christopher x Supreme",
+      "Camisa Polo"
+    ];
+
+    const input = document.getElementById('searchInput');
+    const suggestionsBox = document.getElementById('suggestionsBox');
+
+    function filterSuggestions(value) {
+      if (!value) {
+        suggestionsBox.classList.remove('active');
+        suggestionsBox.innerHTML = '';
+        return;
+      }
+      const filtered = roupas.filter(item =>
+        item.toLowerCase().includes(value.toLowerCase())
+      );
+
+      if (filtered.length === 0) {
+        suggestionsBox.classList.remove('active');
+        suggestionsBox.innerHTML = '';
+        return;
+      }
+      suggestionsBox.innerHTML = filtered.map(item => `<div class="suggestion-item">${item}</div>`).join('');
+      suggestionsBox.classList.add('active');
+    }
+
+    input.addEventListener('input', () => {
+      filterSuggestions(input.value);
+    });
+
+    suggestionsBox.addEventListener('click', (e) => {
+      if (e.target.classList.contains('suggestion-item')) {
+        input.value = e.target.textContent;
+        suggestionsBox.classList.remove('active');
+      }
+    });
+
+    // Fecha sugestões ao clicar fora
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.search-container')) {
+        suggestionsBox.classList.remove('active');
+      }
+    });
+  </script>
+    
+
+
+    <section class="hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <h1 data-lang="heroTitle">Defina Seu Estilo. Redefina a Moda.</h1>
+                <p data-lang="heroSubtitle">Descubra uma curadoria exclusiva de peças internacionais, onde o design encontra a inovação.</p>
+                <a href="coleções.html" class="btn primary" data-lang="exploreBtn">Explorar Agora</a>
+            </div>
+            <div class="hero-image">
+                <img src="assest/img/Gemini_Generated_Image_x4wkoox4wkoox4wk.png" alt="Modelo de moda com roupas de design inovador">
+            </div>
+
+            <div class="bolinhas-container"></div>
+        </div>
+    </section>
+         <script>
+          /* função para criar bolinhas animadas na seção hero */
+          function criarBolinha() {
+            const bolinha = document.createElement("div");
+            bolinha.classList.add("bolinha");
+
+            // Tamanho aleatório
+            const tamanho = Math.random() * 20 + 15;
+            bolinha.style.width = tamanho + "px";
+            bolinha.style.height = tamanho + "px";
+
+            // Seleciona a hero section
+            const hero = document.querySelector(".hero-section");
+            const heroRect = hero.getBoundingClientRect();
+
+            // Posição aleatória dentro da hero section
+            bolinha.style.left =
+              Math.random() * (heroRect.width - tamanho) + "px";
+            bolinha.style.top =
+              Math.random() * (heroRect.height - tamanho) + "px";
+
+            // Animação aleatória
+            const duracao = Math.random() * 3 + 2;
+            bolinha.style.animationDuration = duracao + "s";
+
+            hero.appendChild(bolinha);
+
+            // Remove após a animação
+            setTimeout(() => {
+              bolinha.remove();
+            }, duracao * 1000);
+          }
+
+          // Inicia a criação de bolinhas quando a página estiver pronta
+          window.addEventListener("DOMContentLoaded", () => {
+            setInterval(criarBolinha, 100);
+          });
+        </script>
+
+    <section class="featured-products">
+        <div class="container">
+            <h2 data-lang="featuredTitle">Destaques da Temporada</h2>
+            <p data-lang="featuredSubtitle">Cortes ousados, texturas inovadoras e cores que marcam.</p>
+            <div class="product-grid">
+                <div class="product-item">
+                    <img src="assest/img/moletom.webp" alt="Moletom">
+                    <h3><span data-lang="MoletomTitle">Moletom Denim Tears</span></h3>
+                    <p data-lang="MoletomDesc">Toque de audácia para seu dia a dia.</p>
+                    <span class="price">R$ 899,00</span>
+                    <a href="#" class="btn secondary" data-lang="viewDetails">Ver Detalhes</a>
+                </div>
+                <div class="product-item">
+                    <img src="assest/img/Camiseta.jpeg" alt="Camiseta com design moderno">
+                    <h3><span data-lang="CamisetaTitle">Camiseta Amiri Bar</span></h3>
+                    <p data-lang="pantsDesc">Conforto e forma em perfeita harmonia.</p>
+                    <span class="price">R$ 549,00</span>
+                    <a href="#" class="btn secondary" data-lang="viewDetails">Ver Detalhes</a>
+                </div>
+                <div class="product-item">
+                    <img src="assest/img/jaqueta.jpeg" alt="Jaqueta Branca de grife">
+                    <h3><span data-lang="JaquetaTitle">Jaqueta Palace Palamat</span></h3>
+                    <p data-lang="jacketDesc">Versatilidade e elegância para qualquer ocasião.</p>
+                    <span class="price">R$ 799,00</span>
+                    <a href="#" class="btn secondary" data-lang="viewDetails">Ver Detalhes</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-banner">
+        <div class="container">
+            <h2 data-lang="ctaBannerTitle">Experiência Única de Compras</h2>
+            <p data-lang="ctaBannerSubtitle">Peças selecionadas a dedo para um guarda-roupa que inspira.</p>
+            <a href="coleções.html" class="btn primary" data-lang="shopCollections">Comprar Coleções</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Fire Blend Moda. Todos os direitos reservados.</p>
+            <div class="social-media">
+                <a href="#">Facebook</a>
+                <a href="#">Instagram</a>
+                <a href="#">Pinterest</a>
+            </div>
+        </div>
+    </footer>
+
+
+
+<div id="productModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <img id="modalImage" src="" alt="Imagem do Produto">
+    <h3 id="modalTitle"></h3>
+    <p id="modalDescription"></p>
+    <span id="modalPrice" class="price"></span>
+    <br>
+    <a href="#" class="btn secondary add-to-cart">Carrinho</a>
+  </div>
+  
+
+
+<style>
+/* Estilo do modal */
+.modal {
+  display: none; 
+  position: fixed;
+  z-index: 1000;
+  padding-top: 60px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background: rgba(0,0,0,0.6);
+}
+
+.modal-content {
+  background: #a7a7a7;
+  margin: auto;
+  padding: 20px;
+  border-radius: 12px;
+  width: 400px;
+  text-align: center;
+  animation: fadeIn 0.3s ease-in-out;
+  border: #ff6600 3px solid;
+}
+
+.modal-content img {
+  max-width: 100%;
+  border-radius: 8px;
+}
+
+.modal-image-container {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  width: 100%;
+  max-width: 350px;
+  border-radius: 10px;
+  cursor: zoom-in;
+}
+
+.modal-image-container img {
+  width: 100%;
+  transition: transform 0.2s ease;
+  transform-origin: center center;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: #000;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Animação do preço */
+@keyframes pricePulse {
+  0% { transform: scale(1); color: #000; }
+  50% { transform: scale(1.3); color: #ff7f00; }
+  100% { transform: scale(1); color: #000; }
+}
+
+.price-animate {
+  animation: pricePulse 0.6s ease-in-out;
+}
+
+/* Fonte personalizada para o preço */
+#modalPrice {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ff7f00;
+  display: inline-block;
+  margin-top: 10px;
+}
+
+/* Animação em loop suave */
+@keyframes pricePulse {
+  0% { transform: scale(1); text-shadow: 0 0 5px rgba(0, 0, 0, 0.4); }
+  50% { transform: scale(1.15); text-shadow: 0 0 15px rgba(0, 0, 0, 0.8); }
+  100% { transform: scale(1); text-shadow: 0 0 5px rgba(0, 0, 0, 0.4); }
+}
+
+.price-animate {
+  animation: pricePulse 1.5s ease-in-out infinite;
+}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const modal = document.getElementById("productModal");
+  const modalImg = document.getElementById("modalImage");
+  const modalTitle = document.getElementById("modalTitle");
+  const modalDesc = document.getElementById("modalDescription");
+  const modalPrice = document.getElementById("modalPrice");
+  const closeBtn = document.querySelector(".close");
+
+  // Pega todos os botões "Ver Detalhes"
+  const detailButtons = document.querySelectorAll(".product-item .btn.secondary");
+
+  detailButtons.forEach((btn, index) => {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      const product = btn.closest(".product-item");
+      const img = product.querySelector("img").src;
+      const title = product.querySelector("h3").innerText;
+      const desc = product.querySelector("p").innerText;
+      const price = product.querySelector(".price").innerText;
+
+      modalImg.src = img;
+      modalTitle.textContent = title;
+      modalDesc.textContent = desc;
+      modalPrice.textContent = price;
+
+      modal.style.display = "block";
+    });
+  });
+
+  // Fechar modal
+  closeBtn.addEventListener("click", () => {
+    modal.style.display = "none";
+  });
+
+  // Fecha clicando fora
+  window.addEventListener("click", (e) => {
+    if (e.target === modal) {
+      modal.style.display = "none";
+    }
+  });
+});
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const modal = document.getElementById("productModal");
+  const modalImg = document.getElementById("modalImage");
+  const modalTitle = document.getElementById("modalTitle");
+  const modalDesc = document.getElementById("modalDescription");
+  const modalPrice = document.getElementById("modalPrice");
+  const closeBtn = document.querySelector(".close");
+
+  const detailButtons = document.querySelectorAll(".product-item .btn.secondary");
+
+  detailButtons.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      const product = btn.closest(".product-item");
+      const img = product.querySelector("img").src;
+      const title = product.querySelector("h3").innerText;
+      const desc = product.querySelector("p").innerText;
+      const price = product.querySelector(".price").innerText;
+
+      modalImg.src = img;
+      modalTitle.textContent = title;
+      modalDesc.textContent = desc;
+      modalPrice.textContent = price;
+
+      // Força a reanimação do preço sempre que abrir
+      modalPrice.classList.remove("price-animate");
+      void modalPrice.offsetWidth; // "hack" para resetar animação
+      modalPrice.classList.add("price-animate");
+
+      modal.style.display = "block";
+    });
+  });
+
+  closeBtn.addEventListener("click", () => {
+    modal.style.display = "none";
+  });
+
+  window.addEventListener("click", (e) => {
+    if (e.target === modal) {
+      modal.style.display = "none";
+    }
+  });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const modal = document.getElementById("productModal");
+  const modalImg = document.getElementById("modalImage");
+  const modalTitle = document.getElementById("modalTitle");
+  const modalDesc = document.getElementById("modalDescription");
+  const modalPrice = document.getElementById("modalPrice");
+  const closeBtn = document.querySelector(".close");
+
+  const detailButtons = document.querySelectorAll(".product-item .btn.secondary");
+
+  detailButtons.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      const product = btn.closest(".product-item");
+      const img = product.querySelector("img").src;
+      const title = product.querySelector("h3").innerText;
+      const desc = product.querySelector("p").innerText;
+      const price = product.querySelector(".price").innerText;
+
+      modalImg.src = img;
+      modalTitle.textContent = title;
+      modalDesc.textContent = desc;
+      modalPrice.textContent = price;
+
+      // Ativa a animação em loop
+      modalPrice.classList.add("price-animate");
+
+      modal.style.display = "block";
+    });
+  });
+
+  // Fechar modal
+  closeBtn.addEventListener("click", () => {
+    modal.style.display = "none";
+    modalPrice.classList.remove("price-animate"); // tira animação ao fechar
+  });
+
+  // Fecha clicando fora
+  window.addEventListener("click", (e) => {
+    if (e.target === modal) {
+      modal.style.display = "none";
+      modalPrice.classList.remove("price-animate");
+    }
+  });
+});
+
+</script>
+    
+  <script src="script.js"></script>
+</body>
 </html>
+

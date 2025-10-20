@@ -1,108 +1,105 @@
-
-
-
 /* função para criar bolinhas animadas na seção hero */
 function criarBolinha() {
-    const bolinha = document.createElement('div');
-    bolinha.classList.add('bolinha');
+  const bolinha = document.createElement("div");
+  bolinha.classList.add("bolinha");
 
-    // Tamanho aleatório
-    const tamanho = Math.random() * 20 + 15;
-    bolinha.style.width = tamanho + 'px';
-    bolinha.style.height = tamanho + 'px';
+  // Tamanho aleatório
+  const tamanho = Math.random() * 20 + 15;
+  bolinha.style.width = tamanho + "px";
+  bolinha.style.height = tamanho + "px";
 
-    // Seleciona a hero section
-    const hero = document.querySelector('.hero-section');
-    const heroRect = hero.getBoundingClientRect();
+  // Seleciona a hero section
+  const hero = document.querySelector(".hero-section");
+  const heroRect = hero.getBoundingClientRect();
 
-    // Posição aleatória dentro da hero section
-    bolinha.style.left = Math.random() * (heroRect.width - tamanho) + 'px';
-    bolinha.style.top = Math.random() * (heroRect.height - tamanho) + 'px';
+  // Posição aleatória dentro da hero section
+  bolinha.style.left = Math.random() * (heroRect.width - tamanho) + "px";
+  bolinha.style.top = Math.random() * (heroRect.height - tamanho) + "px";
 
-    // Animação aleatória
-    const duracao = Math.random() * 3 + 2;
-    bolinha.style.animationDuration = duracao + 's';
+  // Animação aleatória
+  const duracao = Math.random() * 3 + 2;
+  bolinha.style.animationDuration = duracao + "s";
 
-    hero.appendChild(bolinha);
+  hero.appendChild(bolinha);
 
-    // Remove após a animação
-    setTimeout(() => {
-        bolinha.remove();
-    }, duracao * 1000);
+  // Remove após a animação
+  setTimeout(() => {
+    bolinha.remove();
+  }, duracao * 1000);
 }
 
 // Inicia a criação de bolinhas quando a página estiver pronta
-window.addEventListener('DOMContentLoaded', () => {
-    setInterval(criarBolinha, 100);
+window.addEventListener("DOMContentLoaded", () => {
+  setInterval(criarBolinha, 100);
 });
 
 /* função barra de navegação */
 
-  function toggleMenu() {
-    document.getElementById("sideMenu").classList.toggle("active");
-  }
+function toggleMenu() {
+  document.getElementById("sideMenu").classList.toggle("active");
+}
 
 /*barra de pesquisa*/
 
-    const roupas = [
-      "Moletom Denim Tears The Cotton Wreath",
-      "Louis Vuitton LV Skate Sneaker Beige White",
-      "Camiseta Louis Vuitton Ready to Wear",
-      "Camiseta Louis Vuitton Ready to Wear",
-      "Gorro Louis Vuitton Gray",
-      "Jaqueta Louis Vuitton Monogram Flower",
-      "Jaqueta Louis Vuitton Bomber Embroidered",
-      "Bermuda Louis Vuitton Jeans Denim",
-      "Cinto Louis Vuitton Monogram Preto",
-      "Jaqueta Louis Vuitton Aviator Monogram",
-      "Bermuda Jeans Louis Vuitton Carpenter",
-      "Camiseta Louis Vuitton Jeans By Tyler",
-      "Colete Jeans",
-      "Mochila Louis Vuitton Christopher x Supreme",
-      "Camisa Polo"
-    ];
+const roupas = [
+  "Moletom Denim Tears The Cotton Wreath",
+  "Louis Vuitton LV Skate Sneaker Beige White",
+  "Camiseta Louis Vuitton Ready to Wear",
+  "Camiseta Louis Vuitton Ready to Wear",
+  "Gorro Louis Vuitton Gray",
+  "Jaqueta Louis Vuitton Monogram Flower",
+  "Jaqueta Louis Vuitton Bomber Embroidered",
+  "Bermuda Louis Vuitton Jeans Denim",
+  "Cinto Louis Vuitton Monogram Preto",
+  "Jaqueta Louis Vuitton Aviator Monogram",
+  "Bermuda Jeans Louis Vuitton Carpenter",
+  "Camiseta Louis Vuitton Jeans By Tyler",
+  "Colete Jeans",
+  "Mochila Louis Vuitton Christopher x Supreme",
+  "Camisa Polo",
+];
 
-    const input = document.getElementById('searchInput');
-    const suggestionsBox = document.getElementById('suggestionsBox');
+const input = document.getElementById("searchInput");
+const suggestionsBox = document.getElementById("suggestionsBox");
 
-    function filterSuggestions(value) {
-      if (!value) {
-        suggestionsBox.classList.remove('active');
-        suggestionsBox.innerHTML = '';
-        return;
-      }
-      const filtered = roupas.filter(item =>
-        item.toLowerCase().includes(value.toLowerCase())
-      );
+function filterSuggestions(value) {
+  if (!value) {
+    suggestionsBox.classList.remove("active");
+    suggestionsBox.innerHTML = "";
+    return;
+  }
+  const filtered = roupas.filter((item) =>
+    item.toLowerCase().includes(value.toLowerCase())
+  );
 
-      if (filtered.length === 0) {
-        suggestionsBox.classList.remove('active');
-        suggestionsBox.innerHTML = '';
-        return;
-      }
-      suggestionsBox.innerHTML = filtered.map(item => `<div class="suggestion-item">${item}</div>`).join('');
-      suggestionsBox.classList.add('active');
-    }
+  if (filtered.length === 0) {
+    suggestionsBox.classList.remove("active");
+    suggestionsBox.innerHTML = "";
+    return;
+  }
+  suggestionsBox.innerHTML = filtered
+    .map((item) => `<div class="suggestion-item">${item}</div>`)
+    .join("");
+  suggestionsBox.classList.add("active");
+}
 
-    input.addEventListener('input', () => {
-      filterSuggestions(input.value);
-    });
+input.addEventListener("input", () => {
+  filterSuggestions(input.value);
+});
 
-    suggestionsBox.addEventListener('click', (e) => {
-      if (e.target.classList.contains('suggestion-item')) {
-        input.value = e.target.textContent;
-        suggestionsBox.classList.remove('active');
-      }
-    });
+suggestionsBox.addEventListener("click", (e) => {
+  if (e.target.classList.contains("suggestion-item")) {
+    input.value = e.target.textContent;
+    suggestionsBox.classList.remove("active");
+  }
+});
 
-    // Fecha sugestões ao clicar fora
-    document.addEventListener('click', (e) => {
-      if (!e.target.closest('.search-container')) {
-        suggestionsBox.classList.remove('active');
-      }
-    });
- 
-
+// Fecha sugestões ao clicar fora
+document.addEventListener("click", (e) => {
+  if (!e.target.closest(".search-container")) {
+    suggestionsBox.classList.remove("active");
+  }
+});
 
 document.addEventListener("DOMContentLoaded", () => {
   const modal = document.getElementById("productModal");
@@ -113,7 +110,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const closeBtn = document.querySelector(".close");
 
   // Pega todos os botões "Ver Detalhes"
-  const detailButtons = document.querySelectorAll(".product-item .btn.secondary");
+  const detailButtons = document.querySelectorAll(
+    ".product-item .btn.secondary"
+  );
 
   detailButtons.forEach((btn, index) => {
     btn.addEventListener("click", (e) => {
@@ -146,7 +145,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-
 /*sujestão de produtos*/
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -157,7 +155,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const modalPrice = document.getElementById("modalPrice");
   const closeBtn = document.querySelector(".close");
 
-  const detailButtons = document.querySelectorAll(".product-item .btn.secondary");
+  const detailButtons = document.querySelectorAll(
+    ".product-item .btn.secondary"
+  );
 
   detailButtons.forEach((btn) => {
     btn.addEventListener("click", (e) => {
@@ -201,7 +201,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const modalPrice = document.getElementById("modalPrice");
   const closeBtn = document.querySelector(".close");
 
-  const detailButtons = document.querySelectorAll(".product-item .btn.secondary");
+  const detailButtons = document.querySelectorAll(
+    ".product-item .btn.secondary"
+  );
 
   detailButtons.forEach((btn) => {
     btn.addEventListener("click", (e) => {
@@ -238,4 +240,3 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
-

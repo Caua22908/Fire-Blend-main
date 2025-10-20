@@ -15,11 +15,11 @@
     <header>
       <div class="container">
         <div class="logo">
-          <a href="home.html"><span class="logo-accent">Fire </span>Blend</a>
+          <a href="index.html"><span class="logo-accent">Fire </span>Blend</a>
         </div>
         <nav>
           <ul>
-            <li><a href="home.html" data-lang="home">Início</a></li>
+            <li><a href="index.html" data-lang="home">Início</a></li>
             <li>
               <a href="coleções.html" data-lang="collections">Coleções</a>
             </li>
@@ -70,7 +70,7 @@
 
       <!-- Menu lateral -->
       <nav id="sideMenu" class="side-menu">
-        <a href="home.html">Início</a>
+        <a href="index.html">Início</a>
         <a href="coleções.html">Coleções</a>
         <a href="carrinho.html">Carrinho</a>
         <a href="contato.html">Contato</a>
@@ -150,6 +150,44 @@
           <h1 data-lang="contactTitle">Fale Conosco</h1>
           <p data-lang="contactSubtitle"></p>
         </div>
+        <script>
+          /* função para criar bolinhas animadas na seção hero */
+          function criarBolinha() {
+            const bolinha = document.createElement("div");
+            bolinha.classList.add("bolinha");
+
+            // Tamanho aleatório
+            const tamanho = Math.random() * 20 + 15;
+            bolinha.style.width = tamanho + "px";
+            bolinha.style.height = tamanho + "px";
+
+            // Seleciona a hero section
+            const hero = document.querySelector(".hero-section");
+            const heroRect = hero.getBoundingClientRect();
+
+            // Posição aleatória dentro da hero section
+            bolinha.style.left =
+              Math.random() * (heroRect.width - tamanho) + "px";
+            bolinha.style.top =
+              Math.random() * (heroRect.height - tamanho) + "px";
+
+            // Animação aleatória
+            const duracao = Math.random() * 3 + 2;
+            bolinha.style.animationDuration = duracao + "s";
+
+            hero.appendChild(bolinha);
+
+            // Remove após a animação
+            setTimeout(() => {
+              bolinha.remove();
+            }, duracao * 1000);
+          }
+
+          // Inicia a criação de bolinhas quando a página estiver pronta
+          window.addEventListener("DOMContentLoaded", () => {
+            setInterval(criarBolinha, 100);
+          });
+        </script>
       </div>
     </section>
 
@@ -234,7 +272,7 @@
         <p data-lang="ctaContactSubtitle">
           Estamos sempre prontos para ouvir você.
         </p>
-        <a href="home.html" class="btn primary" data-lang="backToHome"
+        <a href="index.html" class="btn primary" data-lang="backToHome"
           >Voltar ao Início</a
         >
       </div>
@@ -242,7 +280,11 @@
 
     <footer>
       <div class="container">
-        <p>&copy; 2025 Fire Blend Moda. Todos os direitos reservados.</p>
+        <p>
+          &copy; 2025 Fire Blend Moda. Todos
+          <script src="inicial.js"></script>
+          os direitos reservados.
+        </p>
         <div class="social-media">
           <a href="#">Facebook</a>
           <a href="#">Instagram</a>
@@ -253,6 +295,5 @@
 
     <script src="script.js"></script>
     <script src="inicial.js"></script>
-    
   </body>
 </html>

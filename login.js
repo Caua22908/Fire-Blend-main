@@ -21,6 +21,6 @@ document.getElementById("loginForm").addEventListener("submit", (e) => {
     btn.disabled = false;
 
     // Agora redireciona para a página principal
-    window.location.href = "home.html"; // ou o nome da sua antiga index
+    window.location.href = "index.html"; // ou o nome da sua antiga index
   }, 1500);
 });
