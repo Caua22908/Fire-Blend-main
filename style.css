@@ -99,10 +99,10 @@ nav ul li a::after {
 
 nav ul li a:hover {
   color: var(--red-accent);
-  transform: translateY(-10px);
+  transform: translateY(-0px);
   font-weight: bold;
-  padding: 5px 3px;
-  border-bottom: 2px solid transparent;
+
+  border-bottom: px solid transparent;
 }
 
 nav ul li a.active:after {
@@ -1342,4 +1342,10 @@ footer .social-media a:hover {
   background-color: #e06e00;
   color: #fff;
   border-color: #e06e00;
+}
+
+@media (max-width: 768px) {
+  .login-container #Login {
+    display: none;
+  }
 }

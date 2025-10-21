@@ -1,349 +1,393 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fire Blend - Carrinho</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="shortcut icon" href="assest/img/favicon.ico" type="image/x-icon">
-</head>
-<body>
-    <header>
-        <div class="container">
-            <div class="logo">
-                <a href="index.html"><span class="logo-accent">Fire </span>Blend</a>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="index.html" data-lang="home">Início</a></li>
-                    <li><a href="coleções.html" data-lang="collections">Coleções</a></li>
-                    <li><a href="carrinho.html" data-lang="Carrinho" class="active">Carrinho</a></li>
-                    
-                    
-                    
-                    <li><a href="contato.html" data-lang="contact">Contato</a></li>
-                    <li class="language-switch">
-                        <button id="pt-BR" class="active">PT-BR</button>
-                        <button id="en-US">EN-US</button>
-                    </li>
-                </ul>
-            </nav>
-
-            <div class="search-container">
-    <input 
-      type="text" 
-      placeholder="Buscar roupas, estilos..." 
-      class="search-input" 
-      id="searchInput" 
-      autocomplete="off"
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="shortcut icon"
+      href="assest/img/favicon.ico"
+      type="image/x-icon"
     />
-    <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#ff7f00" stroke-width="2" width="24" height="24" >
-  <circle cx="11" cy="11" r="7" />
-  <line x1="16.65" y1="16.65" x2="21" y2="21" />
-</svg>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div class="logo">
+          <a href="index.html"><span class="logo-accent">Fire </span>Blend</a>
+        </div>
+        <nav>
+          <ul>
+            <li><a href="index.html" data-lang="home">Início</a></li>
+            <li>
+              <a href="coleções.html" data-lang="collections">Coleções</a>
+            </li>
+            <li>
+              <a href="carrinho.html" data-lang="Carrinho" class="active"
+                >Carrinho</a
+              >
+            </li>
 
-    <div class="suggestions" id="suggestionsBox"></div>
-    
-  </div>
+            <li><a href="contato.html" data-lang="contact">Contato</a></li>
+            <li class="language-switch">
+              <button id="pt-BR" class="active">PT-BR</button>
+              <button id="en-US">EN-US</button>
+            </li>
+          </ul>
+        </nav>
 
+        <div class="search-container">
+          <input
+            type="text"
+            placeholder="Buscar roupas, estilos..."
+            class="search-input"
+            id="searchInput"
+            autocomplete="off"
+          />
+          <svg
+            class="search-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="#ff7f00"
+            stroke-width="2"
+            width="24"
+            height="24"
+          >
+            <circle cx="11" cy="11" r="7" />
+            <line x1="16.65" y1="16.65" x2="21" y2="21" />
+          </svg>
+        </div>
+
+        <div class="login-container">
+          <a href="login.html" id="Login" class="active">Login</a>
+        </div>
+
+        <div class="suggestions" id="suggestionsBox"></div>
+      </div>
     </header>
 
     <div class="menu-container">
-    <!-- Ícone hambúrguer -->
-    <div class="menu-icon" onclick="toggleMenu()">
-      ☰
+      <!-- Ícone hambúrguer -->
+      <div class="menu-icon" onclick="toggleMenu()">☰</div>
+
+      <!-- Menu lateral -->
+      <nav id="sideMenu" class="side-menu">
+        <a href="index.html">Início</a>
+        <a href="coleções.html">Coleções</a>
+        <a href="carrinho.html">Carrinho</a>
+        <a href="contato.html">Contato</a>
+        <a href="login.html">Login</a>
+      </nav>
     </div>
-
-    <!-- Menu lateral -->
-    <nav id="sideMenu" class="side-menu">
-      <a href="index.html">Início</a>
-      <a href="coleções.html">Coleções</a>
-      <a href="carrinho.html">Carrinho</a>
-      <a href="contato.html">Contato</a>
-    </nav>
-  </div>
-
-
-<script>
-  function toggleMenu() {
-    document.getElementById("sideMenu").classList.toggle("active");
-  }
-</script>
-
 
     <script>
-    const roupas = [
-      "Moletom Denim Tears The Cotton Wreath",
-      "Louis Vuitton LV Skate Sneaker Beige White",
-      "Camiseta Louis Vuitton Ready to Wear",
-      "Camiseta Louis Vuitton Ready to Wear",
-      "Gorro Louis Vuitton Gray",
-      "Jaqueta Louis Vuitton Monogram Flower",
-      "Jaqueta Louis Vuitton Bomber Embroidered",
-      "Bermuda Louis Vuitton Jeans Denim",
-      "Cinto Louis Vuitton Monogram Preto",
-      "Jaqueta Louis Vuitton Aviator Monogram",
-      "Bermuda Jeans Louis Vuitton Carpenter",
-      "Camiseta Louis Vuitton Jeans By Tyler",
-      "Colete Jeans",
-      "Mochila Louis Vuitton Christopher x Supreme",
-      "Camisa Polo"
-    ];
-
-    const input = document.getElementById('searchInput');
-    const suggestionsBox = document.getElementById('suggestionsBox');
-
-    function filterSuggestions(value) {
-      if (!value) {
-        suggestionsBox.classList.remove('active');
-        suggestionsBox.innerHTML = '';
-        return;
+      function toggleMenu() {
+        document.getElementById("sideMenu").classList.toggle("active");
       }
-      const filtered = roupas.filter(item =>
-        item.toLowerCase().includes(value.toLowerCase())
-      );
-      if (filtered.length === 0) {
-        suggestionsBox.classList.remove('active');
-        suggestionsBox.innerHTML = '';
-        return;
-      }
-      suggestionsBox.innerHTML = filtered.map(item => `<div class="suggestion-item">${item}</div>`).join('');
-      suggestionsBox.classList.add('active');
-    }
+    </script>
 
-    input.addEventListener('input', () => {
-      filterSuggestions(input.value);
-    });
+    <script>
+      const roupas = [
+        "Moletom Denim Tears The Cotton Wreath",
+        "Louis Vuitton LV Skate Sneaker Beige White",
+        "Camiseta Louis Vuitton Ready to Wear",
+        "Camiseta Louis Vuitton Ready to Wear",
+        "Gorro Louis Vuitton Gray",
+        "Jaqueta Louis Vuitton Monogram Flower",
+        "Jaqueta Louis Vuitton Bomber Embroidered",
+        "Bermuda Louis Vuitton Jeans Denim",
+        "Cinto Louis Vuitton Monogram Preto",
+        "Jaqueta Louis Vuitton Aviator Monogram",
+        "Bermuda Jeans Louis Vuitton Carpenter",
+        "Camiseta Louis Vuitton Jeans By Tyler",
+        "Colete Jeans",
+        "Mochila Louis Vuitton Christopher x Supreme",
+        "Camisa Polo",
+      ];
 
-    suggestionsBox.addEventListener('click', (e) => {
-      if (e.target.classList.contains('suggestion-item')) {
-        input.value = e.target.textContent;
-        suggestionsBox.classList.remove('active');
-      }
-    });
+      const input = document.getElementById("searchInput");
+      const suggestionsBox = document.getElementById("suggestionsBox");
 
-    // Fecha sugestões ao clicar fora
-    document.addEventListener('click', (e) => {
-      if (!e.target.closest('.search-container')) {
-        suggestionsBox.classList.remove('active');
+      function filterSuggestions(value) {
+        if (!value) {
+          suggestionsBox.classList.remove("active");
+          suggestionsBox.innerHTML = "";
+          return;
+        }
+        const filtered = roupas.filter((item) =>
+          item.toLowerCase().includes(value.toLowerCase())
+        );
+        if (filtered.length === 0) {
+          suggestionsBox.classList.remove("active");
+          suggestionsBox.innerHTML = "";
+          return;
+        }
+        suggestionsBox.innerHTML = filtered
+          .map((item) => `<div class="suggestion-item">${item}</div>`)
+          .join("");
+        suggestionsBox.classList.add("active");
       }
-    });
-  </script>
+
+      input.addEventListener("input", () => {
+        filterSuggestions(input.value);
+      });
+
+      suggestionsBox.addEventListener("click", (e) => {
+        if (e.target.classList.contains("suggestion-item")) {
+          input.value = e.target.textContent;
+          suggestionsBox.classList.remove("active");
+        }
+      });
+
+      // Fecha sugestões ao clicar fora
+      document.addEventListener("click", (e) => {
+        if (!e.target.closest(".search-container")) {
+          suggestionsBox.classList.remove("active");
+        }
+      });
+    </script>
 
     <section class="hero-section small-hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1 data-lang="cartTitle">Seu Carrinho de Compras</h1>
-                <p data-lang="cartSubtitle">Revise seus itens e finalize sua compra.</p>
-            </div>
-<script>
-            /* função para criar bolinhas animadas na seção hero */
-function criarBolinha() {
-    const bolinha = document.createElement('div');
-    bolinha.classList.add('bolinha');
-
-    // Tamanho aleatório
-    const tamanho = Math.random() * 20 + 15;
-    bolinha.style.width = tamanho + 'px';
-    bolinha.style.height = tamanho + 'px';
-
-    // Seleciona a hero section
-    const hero = document.querySelector('.hero-section');
-    const heroRect = hero.getBoundingClientRect();
-
-    // Posição aleatória dentro da hero section
-    bolinha.style.left = Math.random() * (heroRect.width - tamanho) + 'px';
-    bolinha.style.top = Math.random() * (heroRect.height - tamanho) + 'px';
-
-    // Animação aleatória
-    const duracao = Math.random() * 3 + 2;
-    bolinha.style.animationDuration = duracao + 's';
-
-    hero.appendChild(bolinha);
-
-    // Remove após a animação
-    setTimeout(() => {
-        bolinha.remove();
-    }, duracao * 1000);
-}
-
-// Inicia a criação de bolinhas quando a página estiver pronta
-window.addEventListener('DOMContentLoaded', () => {
-    setInterval(criarBolinha, 100);
-});
-
-/* função barra de navegação */
-
-  function toggleMenu() {
-    document.getElementById("sideMenu").classList.toggle("active");
-  }
-</script>
+      <div class="container">
+        <div class="hero-content">
+          <h1 data-lang="cartTitle">Seu Carrinho de Compras</h1>
+          <p data-lang="cartSubtitle">
+            Revise seus itens e finalize sua compra.
+          </p>
         </div>
+        <script>
+          /* função para criar bolinhas animadas na seção hero */
+          function criarBolinha() {
+            const bolinha = document.createElement("div");
+            bolinha.classList.add("bolinha");
+
+            // Tamanho aleatório
+            const tamanho = Math.random() * 20 + 15;
+            bolinha.style.width = tamanho + "px";
+            bolinha.style.height = tamanho + "px";
+
+            // Seleciona a hero section
+            const hero = document.querySelector(".hero-section");
+            const heroRect = hero.getBoundingClientRect();
+
+            // Posição aleatória dentro da hero section
+            bolinha.style.left =
+              Math.random() * (heroRect.width - tamanho) + "px";
+            bolinha.style.top =
+              Math.random() * (heroRect.height - tamanho) + "px";
+
+            // Animação aleatória
+            const duracao = Math.random() * 3 + 2;
+            bolinha.style.animationDuration = duracao + "s";
+
+            hero.appendChild(bolinha);
+
+            // Remove após a animação
+            setTimeout(() => {
+              bolinha.remove();
+            }, duracao * 1000);
+          }
+
+          // Inicia a criação de bolinhas quando a página estiver pronta
+          window.addEventListener("DOMContentLoaded", () => {
+            setInterval(criarBolinha, 100);
+          });
+
+          /* função barra de navegação */
+
+          function toggleMenu() {
+            document.getElementById("sideMenu").classList.toggle("active");
+          }
+        </script>
+      </div>
     </section>
 
+    <section class="cart-section">
+      <div class="container">
+        <div id="carrinho" class="cart-items"></div>
 
-      <section class="cart-section">
-  <div class="container">
-    <div id="carrinho" class="cart-items"></div>
+        <div class="cart-summary">
+          <h2>Resumo do Pedido</h2>
+          <div class="summary-line">
+            <span>Subtotal:</span>
+            <span id="subtotal" class="summary-value">R$ 0,00</span>
+          </div>
+          <div class="summary-line">
+            <span>Frete:</span>
+            <span class="summary-value">A calcular</span>
+          </div>
+          <div class="summary-line total">
+            <span>Total:</span>
+            <span id="total" class="summary-value">R$ 0,00</span>
+          </div>
+          <button class="btn primary full-width" onclick="finalizarCompra()">
+            Finalizar Compra
+          </button>
+          <button onclick="limparCarrinho()" class="btn secondary full-width">
+            Esvaziar Carrinho
+          </button>
+          <a href="coleções.html" class="btn secondary full-width"
+            >Continuar Comprando</a
+          >
+        </div>
+      </div>
+    </section>
 
-    <div class="cart-summary">
-      <h2>Resumo do Pedido</h2>
-      <div class="summary-line">
-        <span>Subtotal:</span>
-        <span id="subtotal" class="summary-value">R$ 0,00</span>
+    <div id="pixModal" class="pix-modal">
+      <div class="pix-box">
+        <h2>Pagamento via PIX</h2>
+        <p><strong>Total:</strong> <span id="pixTotal"></span></p>
+
+        <img id="pixQrCode" src="" alt="QR Code PIX" width="220" height="220" />
+
+        <p><strong>Copia e Cola:</strong></p>
+        <textarea id="pixCopiaCola" readonly></textarea>
+        <button class="btn primary" onclick="copiarPix()">
+          Copiar Código PIX
+        </button>
+        <button class="btn secondary" onclick="fecharModal()">Fechar</button>
       </div>
-      <div class="summary-line">
-        <span>Frete:</span>
-        <span class="summary-value">A calcular</span>
-      </div>
-      <div class="summary-line total">
-        <span>Total:</span>
-        <span id="total" class="summary-value">R$ 0,00</span>
-      </div>
-      <button class="btn primary full-width"onclick="finalizarCompra()">Finalizar Compra</button>
-      <button onclick="limparCarrinho()" class="btn secondary full-width">Esvaziar Carrinho</button>
-      <a href="coleções.html" class="btn secondary full-width">Continuar Comprando</a>
     </div>
-  </div>
-</section>
 
-<div id="pixModal" class="pix-modal">
-  <div class="pix-box">
-    <h2>Pagamento via PIX</h2>
-    <p><strong>Total:</strong> <span id="pixTotal"></span></p>
+    <style>
+      /* Fundo escuro */
+      .pix-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: 9999;
+      }
 
-    <img id="pixQrCode" src="" alt="QR Code PIX" width="220" height="220" />
+      /* Caixa central */
+      .pix-box {
+        background: #fff;
+        padding: 20px;
+        border-radius: 16px;
+        width: 350px;
+        max-width: 95%;
+        text-align: center;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      }
+      .pix-box h2 {
+        margin-bottom: 10px;
+      }
+      .pix-box textarea {
+        width: 100%;
+        height: 80px;
+        margin: 10px 0;
+        resize: none;
+        padding: 8px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+      }
+      .pix-box button {
+        margin-top: 8px;
+        width: 100%;
+      }
+    </style>
 
-    <p><strong>Copia e Cola:</strong></p>
-    <textarea id="pixCopiaCola" readonly></textarea>
-    <button class="btn primary" onclick="copiarPix()">Copiar Código PIX</button>
-    <button class="btn secondary" onclick="fecharModal()">Fechar</button>
-  </div>
-</div>
+    <script>
+      // Função CRC16 para PIX
+      function calcularCRC16(payload) {
+        let polinomio = 0x1021;
+        let resultado = 0xffff;
+        for (let offset = 0; offset < payload.length; offset++) {
+          resultado ^= payload.charCodeAt(offset) << 8;
+          for (let bitwise = 0; bitwise < 8; bitwise++) {
+            if ((resultado <<= 1) & 0x10000) resultado ^= polinomio;
+            resultado &= 0xffff;
+          }
+        }
+        return resultado.toString(16).toUpperCase().padStart(4, "0");
+      }
 
+      // Gera payload PIX oficial
+      function gerarPayload(valor) {
+        let chavePix =
+          "00020126580014BR.GOV.BCB.PIX0136149720d3-f3be-47e6-b1fe-fc1874b3c3fb5204000053039865802BR5921Caua Ramalho de Sousa6009SAO PAULO62140510UGGAETrWia6304C4B1";
+        let nomeRecebedor = "FIRE BLEND"; // até 25 caracteres
+        let cidade = "Brasília";
 
-<style>
-/* Fundo escuro */
-.pix-modal {
-  display: none;
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.6);
-  z-index: 9999;
-}
+        let payload =
+          "000201" +
+          "26" +
+          (4 + chavePix.length).toString().padStart(2, "0") +
+          "0014BR.GOV.BCB.PIX" +
+          "01" +
+          chavePix.length.toString().padStart(2, "0") +
+          chavePix +
+          "52040000" +
+          "5303986" +
+          "54" +
+          valor.toFixed(2).toString().length.toString().padStart(2, "0") +
+          valor.toFixed(2) +
+          "5802BR" +
+          "59" +
+          nomeRecebedor.length.toString().padStart(2, "0") +
+          nomeRecebedor +
+          "60" +
+          cidade.length.toString().padStart(2, "0") +
+          cidade +
+          "62070503***" +
+          "6304";
 
-/* Caixa central */
-.pix-box {
-  background: #fff;
-  padding: 20px;
-  border-radius: 16px;
-  width: 350px;
-  max-width: 95%;
-  text-align: center;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-}
-.pix-box h2 {
-  margin-bottom: 10px;
-}
-.pix-box textarea {
-  width: 100%;
-  height: 80px;
-  margin: 10px 0;
-  resize: none;
-  padding: 8px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-}
-.pix-box button {
-  margin-top: 8px;
-  width: 100%;
-}
-</style>
+        let crc = calcularCRC16(payload);
+        return payload + crc;
+      }
 
-<script>
-// Função CRC16 para PIX
-function calcularCRC16(payload) {
-  let polinomio = 0x1021;
-  let resultado = 0xFFFF;
-  for (let offset = 0; offset < payload.length; offset++) {
-    resultado ^= (payload.charCodeAt(offset) << 8);
-    for (let bitwise = 0; bitwise < 8; bitwise++) {
-      if ((resultado <<= 1) & 0x10000) resultado ^= polinomio;
-      resultado &= 0xFFFF;
-    }
-  }
-  return resultado.toString(16).toUpperCase().padStart(4, '0');
-}
+      // Abrir modal PIX
+      function finalizarCompra() {
+        let totalStr = document
+          .getElementById("total")
+          .textContent.replace("R$", "")
+          .replace(",", ".")
+          .trim();
+        let total = parseFloat(totalStr);
 
-// Gera payload PIX oficial
-function gerarPayload(valor) {
-  let chavePix = "00020126580014BR.GOV.BCB.PIX0136149720d3-f3be-47e6-b1fe-fc1874b3c3fb5204000053039865802BR5921Caua Ramalho de Sousa6009SAO PAULO62140510UGGAETrWia6304C4B1"; 
-  let nomeRecebedor = "FIRE BLEND";   // até 25 caracteres
-  let cidade = "Brasília";
+        let payload = gerarPayload(total);
 
-  let payload =
-    "000201" +
-    "26" + (4 + chavePix.length).toString().padStart(2,"0") +
-      "0014BR.GOV.BCB.PIX" +
-      "01" + chavePix.length.toString().padStart(2,"0") + chavePix +
-    "52040000" +
-    "5303986" +
-    "54" + valor.toFixed(2).toString().length.toString().padStart(2,"0") + valor.toFixed(2) +
-    "5802BR" +
-    "59" + nomeRecebedor.length.toString().padStart(2,"0") + nomeRecebedor +
-    "60" + cidade.length.toString().padStart(2,"0") + cidade +
-    "62070503***" +
-    "6304";
+        document.getElementById("pixTotal").textContent =
+          "R$ " + total.toFixed(2);
+        document.getElementById("pixCopiaCola").value = payload;
+        document.getElementById("pixQrCode").src =
+          "assest/img/WhatsApp Image 2025-09-03 at 14.38.48.jpeg";
 
-  let crc = calcularCRC16(payload);
-  return payload + crc;
-}
+        document.getElementById("pixModal").style.display = "flex";
+      }
 
-// Abrir modal PIX
-function finalizarCompra() {
-  let totalStr = document.getElementById("total").textContent.replace("R$", "").replace(",", ".").trim();
-  let total = parseFloat(totalStr);
+      // Copiar código PIX
+      function copiarPix() {
+        let campo = document.getElementById("pixCopiaCola");
+        campo.select();
+        document.execCommand("copy");
+        alert("Código PIX copiado!");
+      }
 
-  let payload = gerarPayload(total);
+      // Fechar modal
+      function fecharModal() {
+        document.getElementById("pixModal").style.display = "none";
+      }
+    </script>
 
-  document.getElementById("pixTotal").textContent = "R$ " + total.toFixed(2);
-  document.getElementById("pixCopiaCola").value = payload;
-  document.getElementById("pixQrCode").src = "assest/img/WhatsApp Image 2025-09-03 at 14.38.48.jpeg";
+    <script>
+      function carregarCarrinho() {
+        let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+        let container = document.getElementById("carrinho");
+        let subtotal = 0;
+        container.innerHTML = "";
 
-  document.getElementById("pixModal").style.display = "flex";
-}
+        carrinho.forEach((item, index) => {
+          subtotal += item.preco * (item.quantidade || 1);
 
-// Copiar código PIX
-function copiarPix() {
-  let campo = document.getElementById("pixCopiaCola");
-  campo.select();
-  document.execCommand("copy");
-  alert("Código PIX copiado!");
-}
-
-// Fechar modal
-function fecharModal() {
-  document.getElementById("pixModal").style.display = "none";
-}
-</script>
-
-
-
-
-<script>
-function carregarCarrinho() {
-  let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
-  let container = document.getElementById("carrinho");
-  let subtotal = 0;
-  container.innerHTML = "";
-
-  carrinho.forEach((item, index) => {
-    subtotal += item.preco * (item.quantidade || 1);
-
-    let div = document.createElement("div");
-    div.classList.add("cart-item");
-    div.innerHTML = `
+          let div = document.createElement("div");
+          div.classList.add("cart-item");
+          div.innerHTML = `
       <img src="${item.imagem}" width="80">
       <div class="item-details">
         <h3>${item.nome}</h3>
@@ -356,55 +400,64 @@ function carregarCarrinho() {
         <button class="remove-item" onclick="removerItem(${index})">Remover</button>
       </div>
     `;
-    container.appendChild(div);
-  });
+          container.appendChild(div);
+        });
 
-  document.getElementById("subtotal").textContent = "R$ " + subtotal.toFixed(2);
-  document.getElementById("total").textContent = "R$ " + subtotal.toFixed(2);
-}
+        document.getElementById("subtotal").textContent =
+          "R$ " + subtotal.toFixed(2);
+        document.getElementById("total").textContent =
+          "R$ " + subtotal.toFixed(2);
+      }
 
-function removerItem(index) {
-  let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
-  carrinho.splice(index, 1);
-  localStorage.setItem("carrinho", JSON.stringify(carrinho));
-  carregarCarrinho();
-}
+      function removerItem(index) {
+        let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+        carrinho.splice(index, 1);
+        localStorage.setItem("carrinho", JSON.stringify(carrinho));
+        carregarCarrinho();
+      }
 
-function atualizarQuantidade(index, novaQtd) {
-  let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
-  carrinho[index].quantidade = parseInt(novaQtd);
-  localStorage.setItem("carrinho", JSON.stringify(carrinho));
-  carregarCarrinho();
-}
+      function atualizarQuantidade(index, novaQtd) {
+        let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+        carrinho[index].quantidade = parseInt(novaQtd);
+        localStorage.setItem("carrinho", JSON.stringify(carrinho));
+        carregarCarrinho();
+      }
 
-function limparCarrinho() {
-  localStorage.removeItem("carrinho");
-  carregarCarrinho();
-}
+      function limparCarrinho() {
+        localStorage.removeItem("carrinho");
+        carregarCarrinho();
+      }
 
-carregarCarrinho();
-</script>
+      carregarCarrinho();
+    </script>
 
     <section class="cta-banner">
-        <div class="container">
-            <h2 data-lang="ctaCartTitle">Sua Moda, Seu Estilo</h2>
-            <p data-lang="ctaCartSubtitle">Aproveite as últimas tendências com a Fire Blend.</p>
-            <a href="collections.html" class="btn primary" data-lang="exploreCollections">Explorar Coleções</a>
-        </div>
+      <div class="container">
+        <h2 data-lang="ctaCartTitle">Sua Moda, Seu Estilo</h2>
+        <p data-lang="ctaCartSubtitle">
+          Aproveite as últimas tendências com a Fire Blend.
+        </p>
+        <a
+          href="collections.html"
+          class="btn primary"
+          data-lang="exploreCollections"
+          >Explorar Coleções</a
+        >
+      </div>
     </section>
 
     <footer>
-        <div class="container">
-            <p>&copy; 2025 Fire Blend Moda. Todos os direitos reservados.</p>
-            <div class="social-media">
-                <a href="#">Facebook</a>
-                <a href="#">Instagram</a>
-                <a href="#">Pinterest</a>
-            </div>
+      <div class="container">
+        <p>&copy; 2025 Fire Blend Moda. Todos os direitos reservados.</p>
+        <div class="social-media">
+          <a href="#">Facebook</a>
+          <a href="#">Instagram</a>
+          <a href="#">Pinterest</a>
         </div>
+      </div>
     </footer>
 
     <script src="script.js"></script>
     <script src="inicial.js"></script>
-</body>
+  </body>
 </html>
