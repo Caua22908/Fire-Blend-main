@@ -203,7 +203,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const detailButtons = document.querySelectorAll(
     ".product-item .btn.secondary"
-  );
+  );onst tamanho = Math.random() * 20 + 15;
+  bolinha.style.width = tamanho + "px";
+  bolinha.style.height = tamanho + "px";
+
 
   detailButtons.forEach((btn) => {
     btn.addEventListener("click", (e) => {
