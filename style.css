@@ -125,7 +125,7 @@ nav ul li a.active {
   color: var(--text-light);
   border: 1px solid var(--text-light);
   padding: 8px 12px;
-  
+
   cursor: pointer;
   font-size: 0.9em;
   border-radius: 5px;
@@ -890,7 +890,7 @@ footer .social-media a:hover {
     margin-top: 10px;
   }
 }
-
+/* 
 @media (max-width: 480px) {
   .cart-items,
   .cart-summary {
@@ -904,7 +904,7 @@ footer .social-media a:hover {
   .cart-summary h2 {
     font-size: 1.8em;
   }
-}
+} */
 
 /* Contato */
 .contact-section {
@@ -1348,4 +1348,34 @@ footer .social-media a:hover {
     display: none;
   }
 }
-#Log
+
+@media (max-width: 768px) {
+  .cart-section {
+    padding: 5px;
+    margin-right: 100px;
+  }
+
+  .cart-items {
+    padding: 5px;
+    margin-right: 100px;
+  }
+
+  .cart-summary {
+    padding: 25px;
+    margin-right: 100px;
+  }
+
+  .cart-summary .btn.btn.full-width {
+    width: 100%;
+    margin-bottom: 5px;
+  }
+}
+
+.btn.btn.full-width1 {
+  width: 80%;
+  margin-bottom: 13px;
+
+  justify-content: center;
+  align-items: center;
+  padding: 7px 25px;
+}

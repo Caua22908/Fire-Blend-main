@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
       home: "Início",
       newArrivals: "Novidades",
       collections: "Coleções",
-      shop: "Carrinho",
+      cart: "Carrinho",
       contact: "Contato",
       // Hero Section
       heroTitle: "Defina Seu Estilo. Redefina a Moda.",
@@ -103,7 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // Header
       home: "Início",
       collections: "Coleções",
-      Carrinho: "Carrinho", // Mantido como no HTML, ajuste se quiser mudar para 'Carrinho'
+      cart: "Carrinho", // Mantido como no HTML, ajuste se quiser mudar para 'Carrinho'
       contact: "Contato",
 
       // Index Page (Home)
@@ -189,7 +189,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // Header
       home: "Home",
       collections: "Collections",
-      Carrinho: "Cart", // Renomeado para 'Cart'
+      cart: "Cart", // Renomeado para 'Cart'
       contact: "Contact",
 
       // Index Page (Home)
