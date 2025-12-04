@@ -8,17 +8,102 @@
   <style>
     /* pequenas customizações administrativas */
     .admin-container { max-width:1100px; margin:32px auto; padding:16px; }
-    .admin-tabs { display:flex; gap:8px; margin-bottom:16px; }
-    .admin-tabs button { padding:8px 12px; border-radius:6px; border:1px solid #ddd; background:#fff; cursor:pointer; }
+    .admin-tabs { display:flex; gap:8px; margin-bottom:16px; flex-wrap:wrap; }
+    .admin-tabs button { padding:8px 12px; border-radius:6px; border:1px solid #ddd; background:#fff; cursor:pointer; font-size:14px; white-space:nowrap; }
     .admin-tabs button.active { background:#ff7f00; color:#fff; border-color:#ff7f00; }
     .admin-panel { background:#fff; padding:16px; border-radius:8px; box-shadow:0 4px 18px rgba(0,0,0,0.06); }
     table { width:100%; border-collapse:collapse; }
     table th, table td { padding:8px 10px; border-bottom:1px solid #eee; text-align:left; }
-    .small-btn { padding:6px 8px; border-radius:6px; border:1px solid #ddd; background:#fafafa; cursor:pointer; }
+    .small-btn { padding:6px 8px; border-radius:6px; border:1px solid #ddd; background:#fafafa; cursor:pointer; font-size:12px; }
     .danger { background:#ffdddd; border-color:#ff9999; }
     .success { background:#ddffea; border-color:#a2f0c4; }
     .form-row { display:flex; gap:8px; margin-bottom:8px; }
     .form-row input { flex:1; padding:8px; }
+    
+    /* Responsividade para área administrativa */
+    @media (max-width: 768px) {
+      .admin-container { 
+        margin:16px auto; 
+        padding:12px; 
+      }
+      
+      .admin-tabs { 
+        flex-direction:column; 
+        gap:6px; 
+      }
+      
+      .admin-tabs button { 
+        width:100%; 
+        padding:10px 12px; 
+        font-size:15px; 
+      }
+      
+      .admin-panel { 
+        padding:12px; 
+        overflow-x:auto; 
+      }
+      
+      /* Tabelas responsivas - scroll horizontal */
+      table { 
+        min-width:600px; 
+        font-size:13px; 
+      }
+      
+      table th, table td { 
+        padding:6px 8px; 
+        font-size:12px; 
+      }
+      
+      /* Formulários em coluna no mobile */
+      .form-row { 
+        flex-direction:column; 
+        gap:8px; 
+      }
+      
+      .form-row input { 
+        width:100%; 
+      }
+      
+      /* Botões menores no mobile */
+      .small-btn { 
+        padding:8px 10px; 
+        font-size:11px; 
+        width:100%; 
+        margin-top:4px; 
+      }
+      
+      /* Header responsivo */
+      header .container {
+        flex-wrap:wrap;
+      }
+      
+      nav ul {
+        display:none;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .admin-container { 
+        padding:8px; 
+      }
+      
+      table { 
+        min-width:500px; 
+        font-size:11px; 
+      }
+      
+      table th, table td { 
+        padding:4px 6px; 
+      }
+      
+      .admin-panel h2 { 
+        font-size:1.3em; 
+      }
+      
+      .admin-panel h3 { 
+        font-size:1.1em; 
+      }
+    }
   </style>
 </head>
 <body>
@@ -32,8 +117,31 @@
           <li><a href="carrinho.html">Carrinho</a></li>
         </ul>
       </nav>
+      <div class="login-container">
+        <a href="login.html" id="Login" class="active">Login</a>
+      </div>
     </div>
   </header>
+
+  <div class="menu-container">
+    <!-- Ícone hambúrguer -->
+    <div class="menu-icon" onclick="toggleMenu()">☰</div>
+
+    <!-- Menu lateral -->
+    <nav id="sideMenu" class="side-menu">
+      <a href="index.html">Início</a>
+      <a href="coleções.html">Coleções</a>
+      <a href="carrinho.html">Carrinho</a>
+      <a href="contato.html">Contato</a>
+      <a href="login.html">Login</a>
+    </nav>
+  </div>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById("sideMenu").classList.toggle("active");
+    }
+  </script>
 
   <main class="admin-container">
     <h1>Área Administrativa</h1>

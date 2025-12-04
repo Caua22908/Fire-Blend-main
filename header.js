@@ -14,17 +14,18 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const loggedClient = JSON.parse(localStorage.getItem('loggedClient') || 'null');
+  const sideMenu = document.getElementById('sideMenu');
 
   if (loggedClient) {
-    // Usuário está logado - mostra apenas botão Sair
+    // Usuário está logado - mostra apenas botão Sair no header (desktop)
     let html = `
-      <div style="display:flex; gap:12px; align-items:center;">
+      <div class="header-auth-buttons" style="display:flex; gap:12px; align-items:center;">
     `;
 
     // Se for admin, adiciona botão admin
     if (loggedClient.role === 'admin') {
       html += `
-        <a href="admin.html" style="
+        <a href="admin.html" class="admin-btn-header" style="
           padding:8px 12px;
           border-radius:6px;
           background:#ff7f00;
@@ -37,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     html += `
-        <button id="logout-btn" style="
+        <button id="logout-btn" class="logout-btn-header" style="
           padding:8px 12px;
           border-radius:6px;
           background:#f0f0f0;
@@ -55,8 +56,49 @@ document.addEventListener('DOMContentLoaded', () => {
       localStorage.removeItem('loggedClient');
       window.location.href = 'index.html';
     });
+
+    // Adiciona botões no menu lateral (mobile)
+    if (sideMenu) {
+      // Remove o link de Login do menu lateral se existir
+      const loginLink = sideMenu.querySelector('a[href="login.html"]');
+      if (loginLink) {
+        loginLink.remove();
+      }
+
+      // Adiciona botão Admin se for admin
+      if (loggedClient.role === 'admin') {
+        const adminLink = document.createElement('a');
+        adminLink.href = 'admin.html';
+        adminLink.textContent = 'Admin';
+        adminLink.style.cssText = 'background:#ff7f00; color:#fff; font-weight:bold;';
+        sideMenu.appendChild(adminLink);
+      }
+
+      // Adiciona botão Sair
+      const logoutLink = document.createElement('a');
+      logoutLink.href = '#';
+      logoutLink.textContent = 'Sair';
+      logoutLink.style.cssText = 'background:#f0f0f0; color:#333; font-weight:bold; cursor:pointer;';
+      logoutLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        localStorage.removeItem('loggedClient');
+        window.location.href = 'index.html';
+      });
+      sideMenu.appendChild(logoutLink);
+    }
   } else {
     // Usuário não está logado
     loginContainer.innerHTML = '<a href="login.html" id="Login" class="active">Login</a>';
+    
+    // Garante que o link de Login está no menu lateral
+    if (sideMenu) {
+      const existingLoginLink = sideMenu.querySelector('a[href="login.html"]');
+      if (!existingLoginLink) {
+        const loginLink = document.createElement('a');
+        loginLink.href = 'login.html';
+        loginLink.textContent = 'Login';
+        sideMenu.appendChild(loginLink);
+      }
+    }
   }
 });

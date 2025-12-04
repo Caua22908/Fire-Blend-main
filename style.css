@@ -1347,6 +1347,11 @@ footer .social-media a:hover {
   .login-container #Login {
     display: none;
   }
+  
+  /* Esconde botões Admin e Sair no header em mobile */
+  .header-auth-buttons {
+    display: none !important;
+  }
 }
 
 @media (max-width: 768px) {
