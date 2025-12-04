@@ -6,7 +6,8 @@ module.exports = (sequelize, DataTypes) => {
     endereco: { type: DataTypes.STRING(100), allowNull: false },
     cpf: { type: DataTypes.STRING(15), allowNull: false },
     email: { type: DataTypes.STRING(100), allowNull: false },
-    senha: { type: DataTypes.STRING(45), allowNull: false }
+    senha: { type: DataTypes.STRING(100), allowNull: false },
+    role: { type: DataTypes.STRING(20), defaultValue: 'user', allowNull: false }
   }, {
     tableName: 'cliente',
     timestamps: false,

@@ -1,47 +1,77 @@
 // register.js
-document.getElementById("registerForm").addEventListener("submit", (e) => {
-  e.preventDefault();
+async function handleRegister(e) {
+  if (e && e.preventDefault) e.preventDefault();
+  console.debug('handleRegister called');
 
-  const name = document.getElementById("name").value.trim();
+  const nome = document.getElementById("name").value.trim();
   const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value.trim();
+  const senha = document.getElementById("password").value.trim();
   const confirmPassword = document.getElementById("confirmPassword").value.trim();
 
-  // 1. Validação simples de preenchimento
-  if (!name || !email || !password || !confirmPassword) {
+  if (!nome || !email || !senha || !confirmPassword) {
     alert("Preencha todos os campos!");
     return;
   }
-
-  // 2. Validação da senha
-  if (password !== confirmPassword) {
+  if (senha !== confirmPassword) {
     alert("As senhas não coincidem!");
     return;
   }
-  
-  // 3. Validação de formato de e-mail (opcional, mas bom)
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(email)) {
     alert("Por favor, insira um endereço de e-mail válido.");
     return;
   }
 
-  // Simulação de processamento
   const btn = document.querySelector(".login-btn");
   btn.innerText = "Cadastrando...";
   btn.style.opacity = "0.7";
   btn.disabled = true;
 
-  setTimeout(() => {
-    // Simula a resposta do servidor: sucesso!
-    alert(`Cadastro de ${name} realizado com sucesso! Use seu e-mail (${email}) para fazer login.`);
-    
-    // Volta o botão ao estado normal
-    btn.innerText = "Cadastrar";
-    btn.style.opacity = "1";
+  try {
+    const res = await fetch('/api/clientes', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nome, telefone: '', endereco: '', cpf: '', email, senha })
+    });
+    if (!res.ok) {
+      // tenta ler JSON; se falhar, lê texto; protege contra respostas vazias
+      let errText = 'Erro ao cadastrar';
+      try {
+        const errObj = await res.json();
+        errText = errObj.error || JSON.stringify(errObj) || errText;
+      } catch (e) {
+        try {
+          const t = await res.text();
+          errText = t || errText;
+        } catch (_) {
+          errText = res.statusText || errText;
+        }
+      }
+      throw new Error(errText);
+    }
+    let created;
+    try {
+      created = await res.json();
+    } catch (e) {
+      // resposta vazia ou não-JSON; criar objeto mínimo
+      created = { id_cliente: null, nome, email };
+    }
+    // Salva usuário logado no localStorage (simples)
+    localStorage.setItem('loggedClient', JSON.stringify(created));
+    alert('Cadastro realizado com sucesso! Você já está logado.');
+    window.location.href = 'index.html';
+  } catch (err) {
+    console.error('Erro no cadastro:', err);
+    alert('Erro no cadastro: ' + (err.message || err));
+  } finally {
+    btn.innerText = 'Cadastrar';
+    btn.style.opacity = '1';
     btn.disabled = false;
+  }
+}
 
-    // Redireciona para a página de login após o cadastro
-    window.location.href = "login.html"; 
-  }, 2000);
-});
+// Attach handlers: submit (defensive) and button click
+const form = document.getElementById('registerForm');
+if (form) form.addEventListener('submit', handleRegister);
+const btn = document.getElementById('registerBtn');
+if (btn) btn.addEventListener('click', handleRegister);

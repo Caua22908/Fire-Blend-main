@@ -342,23 +342,71 @@
       }
 
       // Abrir modal PIX
-      function finalizarCompra() {
-        let totalStr = document
-          .getElementById("total")
-          .textContent.replace("R$", "")
-          .replace(",", ".")
-          .trim();
-        let total = parseFloat(totalStr);
+      async function finalizarCompra() {
+        const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+        if (!carrinho.length) {
+          alert('Seu carrinho está vazio.');
+          return;
+        }
+        const logged = JSON.parse(localStorage.getItem('loggedClient'));
+        if (!logged) {
+          alert('Faça login para finalizar a compra.');
+          window.location.href = 'login.html';
+          return;
+        }
+
+        // Try to resolve product IDs by fetching products and matching by name
+        const produtosRes = await fetch('/api/produtos');
+        const produtos = await produtosRes.json();
+
+        for (const item of carrinho) {
+          // try to find a matching product by id or name
+          let produto = null;
+          if (item.id_produto) {
+            produto = produtos.find(p => p.id_produto === item.id_produto);
+          }
+          if (!produto && item.nome) {
+            produto = produtos.find(p =>
+              p.nome && item.nome && (
+                p.nome.toLowerCase().includes(item.nome.toLowerCase()) ||
+                item.nome.toLowerCase().includes(p.nome.toLowerCase())
+              )
+            );
+          }
+          if (!produto) {
+            alert('Não foi possível encontrar o produto para: ' + (item.nome || 'item desconhecido'));
+            return;
+          }
+
+          // create a venda for each item (forma_pagamento PIX for now)
+          const body = {
+            cliente_id_cliente: logged.id_cliente,
+            produto_id_produto: produto.id_produto,
+            forma_pagamento: 'PIX'
+          };
+          const res = await fetch('/api/vendas', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(body)
+          });
+          if (!res.ok) {
+            const err = await res.json();
+            alert('Erro ao registrar venda: ' + (err.error || 'erro desconhecido'));
+            return;
+          }
+        }
+
+        // All vendas created successfully -> clear cart and show PIX
+        const subtotalText = document.getElementById('total').textContent.replace('R$', '').replace(',', '.').trim();
+        const total = parseFloat(subtotalText) || 0;
+        localStorage.removeItem('carrinho');
+        carregarCarrinho();
 
         let payload = gerarPayload(total);
-
-        document.getElementById("pixTotal").textContent =
-          "R$ " + total.toFixed(2);
-        document.getElementById("pixCopiaCola").value = payload;
-        document.getElementById("pixQrCode").src =
-          "assest/img/WhatsApp Image 2025-09-03 at 14.38.48.jpeg";
-
-        document.getElementById("pixModal").style.display = "flex";
+        document.getElementById('pixTotal').textContent = 'R$ ' + total.toFixed(2);
+        document.getElementById('pixCopiaCola').value = payload;
+        document.getElementById('pixQrCode').src = 'assest/img/WhatsApp Image 2025-09-03 at 14.38.48.jpeg';
+        document.getElementById('pixModal').style.display = 'flex';
       }
 
       // Copiar código PIX
@@ -457,6 +505,7 @@
       </div>
     </footer>
 
+    <script src="header.js"></script>
     <script src="script.js"></script>
     <script src="inicial.js"></script>
   </body>

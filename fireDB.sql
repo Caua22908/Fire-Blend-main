@@ -101,3 +101,19 @@ SHOW WARNINGS;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+-- -----------------------------------------------------
+-- Table `admin`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `admin`;
+
+SHOW WARNINGS;
+CREATE TABLE IF NOT EXISTS `admin` (
+  `id_admin` INT NOT NULL AUTO_INCREMENT,
+  `nome` VARCHAR(100) NOT NULL,
+  `email` VARCHAR(100) NOT NULL UNIQUE,
+  `senha_hash` VARCHAR(255) NOT NULL, -- Armazene senhas com hash (ex: bcrypt)
+  PRIMARY KEY (`id_admin`))
+ENGINE = InnoDB;
+
+SHOW WARNINGS;

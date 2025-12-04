@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Admin — Fire Blend</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* pequenas customizações administrativas */
+    .admin-container { max-width:1100px; margin:32px auto; padding:16px; }
+    .admin-tabs { display:flex; gap:8px; margin-bottom:16px; }
+    .admin-tabs button { padding:8px 12px; border-radius:6px; border:1px solid #ddd; background:#fff; cursor:pointer; }
+    .admin-tabs button.active { background:#ff7f00; color:#fff; border-color:#ff7f00; }
+    .admin-panel { background:#fff; padding:16px; border-radius:8px; box-shadow:0 4px 18px rgba(0,0,0,0.06); }
+    table { width:100%; border-collapse:collapse; }
+    table th, table td { padding:8px 10px; border-bottom:1px solid #eee; text-align:left; }
+    .small-btn { padding:6px 8px; border-radius:6px; border:1px solid #ddd; background:#fafafa; cursor:pointer; }
+    .danger { background:#ffdddd; border-color:#ff9999; }
+    .success { background:#ddffea; border-color:#a2f0c4; }
+    .form-row { display:flex; gap:8px; margin-bottom:8px; }
+    .form-row input { flex:1; padding:8px; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="logo"><a href="index.html"><span class="logo-accent">Fire </span>Blend</a></div>
+      <nav>
+        <ul>
+          <li><a href="index.html">Início</a></li>
+          <li><a href="coleções.html">Coleções</a></li>
+          <li><a href="carrinho.html">Carrinho</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="admin-container">
+    <h1>Área Administrativa</h1>
+    <p>Gerencie produtos, clientes e vendas.</p>
+
+    <div class="admin-tabs">
+      <button id="tab-produtos" class="active">Produtos</button>
+      <button id="tab-clientes">Clientes</button>
+      <button id="tab-vendas">Vendas</button>
+    </div>
+
+    <div id="panel" class="admin-panel">
+      <!-- conteúdo dinâmico -->
+    </div>
+  </main>
+
+  <script src="header.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>
