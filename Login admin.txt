@@ -1,0 +1,9 @@
+Senha: admin
+usuário: root
+
+porta: 3306
+banco: mydb
+
+
+admin@fireblend.com
+admin123

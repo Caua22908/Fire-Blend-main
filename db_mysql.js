@@ -23,7 +23,7 @@ const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASS, {
   },
 });
 
-// Teste de conexão rápido
+// Teste de conexão ho o 
 (async () => {
   try {
     await sequelize.authenticate();

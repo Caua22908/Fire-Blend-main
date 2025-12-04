@@ -16,10 +16,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const loggedClient = JSON.parse(localStorage.getItem('loggedClient') || 'null');
 
   if (loggedClient) {
-    // Usuário está logado
+    // Usuário está logado - mostra apenas botão Sair
     let html = `
       <div style="display:flex; gap:12px; align-items:center;">
-        <span style="font-size:14px; color:#666;">Olá, ${loggedClient.nome}</span>
     `;
 
     // Se for admin, adiciona botão admin
